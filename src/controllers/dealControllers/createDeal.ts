@@ -17,7 +17,13 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
 
     const dealId = v4();
 
-
+    const dealExist = (await Deal.findOne({ where: { deal_name, owner_id:userId },}))
+    if(dealExist){
+      return response.status(200).json({
+        status: `error`,
+        message: `${deal_name} already exist, use a different name`,
+      });
+    }
     const newUser = await Deal.create({
         id:dealId,
         owner_id:userId,
