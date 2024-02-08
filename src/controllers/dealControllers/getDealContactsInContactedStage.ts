@@ -12,6 +12,13 @@ export const getContactedContacts = async (request:JwtPayload ,response:Response
             return response.status(200).json({
                 status:"success",
                 message:`${contacts.length} contacts found on ${stage} stage` ,
+                data: []
+            })
+        }
+        if (contacts.length > 0){
+            return response.status(200).json({
+                status:"success",
+                message:`${contacts.length} contacts found on ${stage} stage` ,
                 data: contacts
             })
         }

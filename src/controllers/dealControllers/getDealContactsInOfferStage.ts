@@ -8,10 +8,17 @@ export const getOfferContacts = async (request:JwtPayload ,response:Response) =>
         const deal_id = request.params.id;
         const stage = "Term Sheet/ Initial Offer"
         const contacts = await Contact.findAll({where: {owner_id:userId, stage:stage, deal_id}})
-        if (contacts){
+        if (contacts.length === 0){
             return response.status(200).json({
                 status:"success",
-                message:`${contacts.length} contacts found on ${stage} stage`,
+                message:`${contacts.length} contacts found on ${stage} stage` ,
+                data: []
+            })
+        }
+        if (contacts.length > 0){
+            return response.status(200).json({
+                status:"success",
+                message:`${contacts.length} contacts found on ${stage} stage` ,
                 data: contacts
             })
         }
