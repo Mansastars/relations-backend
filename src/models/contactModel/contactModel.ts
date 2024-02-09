@@ -67,7 +67,7 @@ deal_size: {
   type: DataTypes.INTEGER    
 },
 email: {
-    type: DataTypes.STRING    
+    type: DataTypes.STRING
 },
 phone_number: {
     type: DataTypes.STRING,

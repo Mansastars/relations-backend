@@ -20,38 +20,40 @@ export const createDealContact = async (request: JwtPayload, response: Response)
     const deal_id = request.params.id;
 
     const contactId = v4();
+    // const meeting = new Date()
+    const findContact = (await Contact.findOne({
+      where: { email },
+    })) as unknown as ContactAttributes;
 
+
+    if(!findContact){
     const newContact = await Contact.create({
         id: contactId,
         owner_id: userId,
         deal_id,
         first_name,
         last_name,
-        organization_name,
-        deal_size,
-        email,
-        phone_number,
+        organization_name: organization_name || `${first_name}`,
+        deal_size: deal_size || 0,
+        email: email,
+        phone_number: phone_number || '1234567890',
         stage,
-        meeting_date,
-        notes,
+        meeting_date: meeting_date || new Date(),
+        notes: notes || 'No notes available',
         createdAt: new Date(),
         updatedAt: new Date(),
     });
-
-    const findContact = (await Contact.findOne({
-      where: { email },
-    })) as unknown as ContactAttributes;
-    if (!findContact) {
-      return response.status(400).json({
-        status: `error`,
-        message: `Contact not created, try again`,
-      });
-    }
-    return response.status(200).json({
+    return response.status(400).json({
       status: `success`,
       message: `Contact successfully created`,
-      findContact,
     });
+  }
+    if (findContact) {
+      return response.status(400).json({
+        status: `error`,
+        message: `${first_name} ${last_name} already exists on this deal`,
+      });
+    }
   } catch (error: any) {
     console.log(error.message);
     return response.status(500).json({
