@@ -36,7 +36,7 @@ export const createDealContact = async (request: JwtPayload, response: Response)
       deal_id,
       first_name,
       last_name,
-      organization_name: organization_name || `${first_name}`,
+      organization_name: organization_name || ``,
       deal_size: deal_size || 0,
       email: email,
       phone_number: phone_number || '1234567890',

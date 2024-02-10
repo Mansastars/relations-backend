@@ -7,7 +7,7 @@ export const changeDealContactStage = async (request: JwtPayload, response: Resp
     const userId = request.user.id;
     const deal_id = request.params.id;
     const { first_name, last_name, stage } = request.body;
-    const contact = await Contact.findOne({ where: { first_name, last_name, owner_id:userId, deal_id } });
+    const contact = await Contact.findAll({ where: { first_name, last_name, owner_id:userId, deal_id } });
     if(!contact){
         return response.status(400).json({
             status:`error`,
