@@ -15,6 +15,8 @@ import { getProspectContacts } from "../../controllers/dealControllers/getDealCo
 import { getRejectionContacts } from "../../controllers/dealControllers/getDealContactsInRejectionStage";
 import { getResearchContacts } from "../../controllers/dealControllers/getDealContactsInResearchStage";
 import { getReviewContacts } from "../../controllers/dealControllers/getDealContactsInReviewStage";
+import { getSingleDeal } from "../../controllers/dealControllers/getSingleDeal";
+import { deleteDeal } from "../../controllers/dealControllers/deleteDeal";
 
 const router = express.Router();
 
@@ -33,5 +35,7 @@ router.get("/prospect-contacts/:id", generalAuthoriser, getProspectContacts)
 router.get("/rejection-contacts/:id", generalAuthoriser, getRejectionContacts)
 router.get("/research-contacts/:id", generalAuthoriser, getResearchContacts)
 router.get("/review-contacts/:id", generalAuthoriser, getReviewContacts)
+router.get("/single-deal/:id", generalAuthoriser, getSingleDeal)
+router.delete("/delete-deal/:id", generalAuthoriser, deleteDeal)
 
 export default router;
