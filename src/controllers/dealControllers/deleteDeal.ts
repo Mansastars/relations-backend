@@ -5,8 +5,8 @@ import Deal from "../../models/dealModel/dealModel";
 export const deleteDeal = async (request: JwtPayload, response: Response) => {
     try {
         const userId = request.user.id;
-        const deal_id = request.params.id;
-        const deal = await Deal.findOne({ where: { owner_id: userId, deal_id } })
+        const dealId = request.params.id;
+        const deal = await Deal.findOne({ where: { owner_id: userId, id:dealId } })
         if (!deal) {
             return response.status(400).json({
                 status: "error",
@@ -14,11 +14,11 @@ export const deleteDeal = async (request: JwtPayload, response: Response) => {
             })
         }
         if (deal) {
-            const deletedDeal = await Deal.destroy({ where: { owner_id: userId, deal_id } })
+            const deletedDeal = await Deal.destroy({ where: { owner_id: userId, id:dealId } })
             if (deletedDeal) {
                 return response.status(200).json({
                     status: "success",
-                    message: `successfully deleted`,
+                    message: `${deal.deal_name} successfully deleted`,
                     data: deal
                 })
             }else{
@@ -30,6 +30,7 @@ export const deleteDeal = async (request: JwtPayload, response: Response) => {
         }
 
     } catch (error: any) {
+        console.log(error.message)
         return response.status(500).json({
             status: "error",
             message: "Internal Server Error"

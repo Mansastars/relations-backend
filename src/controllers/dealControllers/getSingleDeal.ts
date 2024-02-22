@@ -6,7 +6,7 @@ export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
     try{
         const userId = request.user.id;
         const dealId = request.params.id
-        const deal = await Deal.findOne({where: {id:dealId}})
+        const deal = await Deal.findOne({where: {id:dealId, owner_id:userId}})
         if (!deal){
             return response.status(400).json({
                 status:"error",
