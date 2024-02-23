@@ -4,6 +4,7 @@ import Contact from "../../models/contactModel/contactModel";
 
 export const deleteContact = async (request: JwtPayload, response: Response) => {
     try {
+        console.log("good")
         const userId = request.user.id;
         const deal_id = request.params.id;
         const contact_id = request.params.contact

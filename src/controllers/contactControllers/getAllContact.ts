@@ -23,8 +23,6 @@ export const getAllContacts = async (request:JwtPayload ,response:Response) => {
             status:"error",
             message:"No contacts found, contact admin"
         })
-        
-
     }catch(error:any){
         console.log(error.message);
         return response.status(500).json({
