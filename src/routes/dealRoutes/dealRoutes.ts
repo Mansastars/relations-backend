@@ -17,12 +17,16 @@ import { getResearchContacts } from "../../controllers/dealControllers/getDealCo
 import { getReviewContacts } from "../../controllers/dealControllers/getDealContactsInReviewStage";
 import { getSingleDeal } from "../../controllers/dealControllers/getSingleDeal";
 import { deleteDeal } from "../../controllers/dealControllers/deleteDeal";
+import { editDeal } from "../../controllers/dealControllers/editDeal";
+import { editDealContact } from "../../controllers/dealControllers/editDealContact";
 
 const router = express.Router();
 
 router.patch("/change-stage/:id", generalAuthoriser, changeDealContactStage)
 router.post("/create-deal", generalAuthoriser , createDeal)
+router.patch("/edit-deal/:id", generalAuthoriser, editDeal)
 router.post("/create-contact/:id", generalAuthoriser , createDealContact)
+router.patch("/edit-contact/:id/:contactId", generalAuthoriser, editDealContact)
 router.get("/deals", generalAuthoriser, getAllDeals)
 router.get("/contacted-contacts/:id", generalAuthoriser, getContactedContacts)
 router.get("/deal-contacts/:id", generalAuthoriser, getDealContacts)

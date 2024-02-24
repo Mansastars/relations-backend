@@ -6,10 +6,10 @@ export interface DealAttributes {
     id: string;
     owner_id: string;
     deal_name: string;
-    deal_size: number;
+    deal_size?: number;
     dead_line: Date;
-    negotiation_value: number;
-    signed_value: number;
+    negotiation_value?: number;
+    signed_value?: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -33,16 +33,20 @@ deal_name: {
     allowNull: false,
 },
 deal_size: {
-  type: DataTypes.INTEGER    
+  type: DataTypes.INTEGER,
+  allowNull: true
 },
 dead_line: {
-    type: DataTypes.DATE  
+    type: DataTypes.DATE,
+    allowNull:true
 },
 negotiation_value: {
     type: DataTypes.INTEGER,
+    allowNull:true
 },
 signed_value: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull:true
 },
 createdAt: {
     type: DataTypes.DATE    
