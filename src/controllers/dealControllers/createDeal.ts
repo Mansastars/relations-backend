@@ -29,7 +29,6 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
       date.setDate(0);
     }
     const deadLine = date.toISOString()
-
     await Deal.create({
       id: dealId,
       owner_id: userId,

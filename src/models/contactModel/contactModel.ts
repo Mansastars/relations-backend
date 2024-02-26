@@ -31,7 +31,6 @@ export interface ContactAttributes {
     linkedin_url?: string;
     deal_size?: number;
     contact_color?: string;
-    column_color?:string;
     email?: string;
     phone_number?: string;
     profile_pic?: string;
@@ -100,10 +99,6 @@ deal_size: {
 contact_color:{
     type: DataTypes.STRING,
     allowNull: true
-},
-column_color:{
-    type: DataTypes.STRING,
-    allowNull:true
 },
 email: {
     type: DataTypes.STRING,
