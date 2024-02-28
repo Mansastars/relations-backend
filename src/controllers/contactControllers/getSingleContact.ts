@@ -2,7 +2,7 @@ import { JwtPayload } from "jsonwebtoken";
 import {Response} from 'express'
 import Contact from "../../models/contactModel/contactModel";
 
-export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
+export const getSingleContact = async (request:JwtPayload ,response:Response) => {
     try{
         const userId = request.user.id;
         const dealId = request.params.id

@@ -13,6 +13,7 @@ import { getRejectionContacts } from "../../controllers/contactControllers/getCo
 import { getResearchContacts } from "../../controllers/contactControllers/getContactsInResearchStage";
 import { getReviewContacts } from "../../controllers/contactControllers/getContactsInReviewStage";
 import { deleteContact } from "../../controllers/contactControllers/deleteContact";
+import { getSingleContact } from "../../controllers/contactControllers/getSingleContact";
 
 const router = express.Router();
 
@@ -29,6 +30,6 @@ router.get("/rejection-contacts", generalAuthoriser, getRejectionContacts)
 router.get("/research-contacts", generalAuthoriser, getResearchContacts)
 router.get("/review-contacts", generalAuthoriser, getReviewContacts)
 router.delete("/delete-contact/:id/:contact", generalAuthoriser, deleteContact)
-router.get("/single-contact/:id/:contactId")
+router.get("/single-contact/:id/:contactId", generalAuthoriser,getSingleContact)
 
 export default router;
