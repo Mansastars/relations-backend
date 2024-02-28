@@ -6,7 +6,7 @@ import Deal from "../../models/dealModel/dealModel";
 export const editDeal = async(request:JwtPayload, response: Response) =>{
     try{
         const {deal_name,dead_line,signed_value } = request.body
-        const deal_id = request.params.deal_id
+        const deal_id = request.params.id
         const owner_id = request.user.id
         
         const deal = await Deal.findOne({where: {id: deal_id, owner_id}})

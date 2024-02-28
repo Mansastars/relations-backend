@@ -29,5 +29,6 @@ router.get("/rejection-contacts", generalAuthoriser, getRejectionContacts)
 router.get("/research-contacts", generalAuthoriser, getResearchContacts)
 router.get("/review-contacts", generalAuthoriser, getReviewContacts)
 router.delete("/delete-contact/:id/:contact", generalAuthoriser, deleteContact)
+router.get("/single-contact/:id/:contactId")
 
 export default router;
