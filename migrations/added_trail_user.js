@@ -4,7 +4,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('User', 'on_trial', {
-      type: Sequelize.DataTypes.STRING,
+      type: Sequelize.DataTypes.BOOLEAN,
       allowNull: true, // or false if the column should not allow null values
     });
   },
