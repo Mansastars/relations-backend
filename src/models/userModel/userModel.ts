@@ -18,6 +18,7 @@ export interface UserAttributes {
   password: string;
   role: string;
   profile_picture?: string;
+  on_trial?: boolean;
   is_subscribed?: boolean;
   subscription_name?: string;
   subscription_start_date?: Date;
@@ -79,6 +80,9 @@ User.init(
     },
     profile_picture: {
       type: DataTypes.STRING,
+    },
+    on_trial:{
+      type: DataTypes.BOOLEAN,
     },
     is_subscribed: {
       type: DataTypes.BOOLEAN,
