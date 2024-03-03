@@ -40,6 +40,7 @@ export const registerUser = async (request: Request, response: Response) => {
       email,
       password: passwordHash,
       role: role.USER,
+      on_trial: true,
       is_subscribed: true,
       isBlocked: false,
       createdAt: new Date(),

@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import User, { UserAttributes } from "../../models/userModel/userModel";
 import { generateToken } from "../../helpers/helpers";
 
-export const userLogin = async (request: Request, response: Response) => {
+export const payment = async (request: Request, response: Response) => {
   try {
     const { email, password } = request.body;
 
@@ -24,12 +24,6 @@ export const userLogin = async (request: Request, response: Response) => {
       return response.status(400).json({
         status: `error`,
         message: `Incorrect Password`,
-      });
-    }
-    if(user.isBlocked === true){
-      return response.status(400).json({
-        status: `error`,
-        message: `Your account is currently blocked, please contact admin`,
       });
     }
 

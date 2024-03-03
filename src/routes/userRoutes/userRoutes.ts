@@ -5,6 +5,7 @@ import { userLogin } from "../../controllers/userControllers/userLogin";
 import { getUserProfile } from "../../controllers/userControllers/getUserProfile";
 import { changePassword } from "../../controllers/userControllers/changePassword";
 import { updateProfile } from "../../controllers/userControllers/updateProfile";
+const stripe = require("stripe")(process.env.SECRET_KEY)
 
 const router = express.Router();
 

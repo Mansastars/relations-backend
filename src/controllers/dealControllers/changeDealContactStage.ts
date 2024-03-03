@@ -7,7 +7,9 @@ export const changeDealContactStage = async (request: JwtPayload, response: Resp
     const userId = request.user.id;
     const deal_id = request.params.id;
     const { first_name, last_name, stage } = request.body;
-    const contact = await Contact.findOne({ where: { first_name, last_name, owner_id:userId, deal_id } });
+    const firstName = first_name.toLowerCase()
+    const lastName = last_name.toLowerCase()
+    const contact = await Contact.findOne({ where: { first_name:firstName, last_name:lastName, owner_id:userId, deal_id } });
     if(!contact){
         return response.status(400).json({
             status:`error`,
@@ -19,7 +21,7 @@ export const changeDealContactStage = async (request: JwtPayload, response: Resp
         {
           stage
         },
-        { where: { first_name, last_name, owner_id:userId, deal_id } }
+        { where: { first_name:firstName, last_name:lastName, owner_id:userId, deal_id } }
       );
       const updatedContact = await Contact.findOne({ where: { first_name, last_name, stage, owner_id:userId, deal_id } });
 
