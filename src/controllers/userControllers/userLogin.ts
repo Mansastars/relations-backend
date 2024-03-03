@@ -26,12 +26,6 @@ export const userLogin = async (request: Request, response: Response) => {
         message: `Incorrect Password`,
       });
     }
-    if(user.isBlocked === true){
-      return response.status(400).json({
-        status: `error`,
-        message: `Your account is currently blocked, please contact admin`,
-      });
-    }
 
     const data = {
       id: user.id,
