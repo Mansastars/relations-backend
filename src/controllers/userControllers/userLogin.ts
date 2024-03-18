@@ -34,10 +34,26 @@ export const userLogin = async (request: Request, response: Response) => {
 
     const token = generateToken(data);
 
+    //To calculate number of days from account creation
+    const currentDate:any = new Date()
+    const userCreatedDate: any = user.createdAt
+    const numberOfDays: any = Number((currentDate - userCreatedDate) / (1000 * 60 * 60 * 24))
+    const numberOfDaysLeft = 7 - numberOfDays
+
+    //to show banner
+    let showBanner = null
+    if(numberOfDays < 7 && user.subscription_name === null){
+      showBanner = true
+    }else{
+      showBanner = false
+    }
+
     return response.status(200).json({
       message: `Welcome back ${user.first_name}`,
       token,
       user,
+      numberOfDaysLeft,
+      showBanner 
     });
   } catch (error: any) {
     console.log(error.message);
