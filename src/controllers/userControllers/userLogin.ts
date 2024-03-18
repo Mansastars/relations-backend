@@ -41,7 +41,7 @@ export const userLogin = async (request: Request, response: Response) => {
     });
   } catch (error: any) {
     console.log(error.message);
-    response.status(400).json({
+    response.status(500).json({
       status: `error`,
       method: request.method,
       message: error.message,

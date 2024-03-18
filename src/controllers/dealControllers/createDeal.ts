@@ -8,6 +8,7 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
     const {
       deal_name,
       dead_line,
+      deal_size
     } = request.body;
     const userId = request.user.id;
 
@@ -33,7 +34,7 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
       id: dealId,
       owner_id: userId,
       deal_name,
-      deal_size: 0,
+      deal_size: deal_size ||0,
       dead_line: dead_line || deadLine,
       negotiation_value: 0,
       signed_value: 0,

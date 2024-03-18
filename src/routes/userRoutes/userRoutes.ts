@@ -5,7 +5,8 @@ import { userLogin } from "../../controllers/userControllers/userLogin";
 import { getUserProfile } from "../../controllers/userControllers/getUserProfile";
 import { changePassword } from "../../controllers/userControllers/changePassword";
 import { updateProfile } from "../../controllers/userControllers/updateProfile";
-const stripe = require("stripe")(process.env.SECRET_KEY)
+import { payment, successPayment,  } from "../../controllers/userControllers/payment";
+
 
 const router = express.Router();
 
@@ -14,5 +15,7 @@ router.get("/profile", generalAuthoriser, getUserProfile)
 router.patch("update-profile", generalAuthoriser, updateProfile)
 router.post("/login", userLogin)
 router.post("/register", registerUser)
+router.post("/payment", generalAuthoriser, payment)
+router.get("/successful-payment", generalAuthoriser, successPayment)
 
 export default router;
