@@ -114,12 +114,11 @@ export const successPayment = async (request: JwtPayload, response: Response) =>
                 }
             }) 
             return response.status(200).json({
-                status:`error`,
+                status:`success`,
                 message: "Payment Successful"
             });
         }
 
-        //     return response.json({ message: "Payment successful" });
         else {
             return response.json({
                 status:`error`,
