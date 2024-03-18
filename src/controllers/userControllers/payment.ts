@@ -100,10 +100,8 @@ export const successPayment = async (request: JwtPayload, response: Response) =>
                 plan_duration: String(durationInDays),
                 updatedAt: new Date(),
             }, { where: { session_id: sessionID } })
-            console.log(paid)
 
             const user = await Payment.findOne({ where: { session_id: sessionID } })
-            console.log(user)
 
             await User.update({
                 is_subscribed: true,
@@ -115,7 +113,10 @@ export const successPayment = async (request: JwtPayload, response: Response) =>
                     id: user?.dataValues.user_id
                 }
             }) 
-               
+            return response.status(200).json({
+                status:`error`,
+                message: "Payment Successful"
+            });
         }
 
         //     return response.json({ message: "Payment successful" });
