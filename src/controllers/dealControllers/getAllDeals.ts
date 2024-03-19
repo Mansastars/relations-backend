@@ -1,6 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 import {Response} from 'express'
 import Deal from "../../models/dealModel/dealModel";
+import User, { UserAttributes } from "../../models/userModel/userModel";
 
 export const getAllDeals = async (request:JwtPayload ,response:Response) => {
     try{
@@ -12,17 +13,42 @@ export const getAllDeals = async (request:JwtPayload ,response:Response) => {
                 message:"You currently have no deals",
             })
         }
-        if (deals.length > 0){
-            return response.status(200).json({
-                status:"success",
-                message:`You currently have ${deals.length} deals`,
-                deals
-            })
-        }
-        return response.status(404).json({
-            status:"error",
-            message:"No deal found"
+        
+
+        const user = (await User.findOne({
+            where: { id: userId},
+          })) as unknown as UserAttributes;
+      
+
+        //To calculate number of days from account creation
+    const currentDate:any = new Date()
+    const userCreatedDate: any = user.createdAt
+    const numberOfDays: any = Number((currentDate - userCreatedDate) / (1000 * 60 * 60 * 24))
+    const numberOfDaysLeft = 7 - numberOfDays
+
+    //to show banner
+    let showBanner = null
+    if(numberOfDays < 7 && user.subscription_name === null){
+      showBanner = true
+    }else{
+      showBanner = false
+    }
+
+    if (deals.length > 0){
+        return response.status(200).json({
+            status:"success",
+            message:`You currently have ${deals.length} deals`,
+            deals,
+            showBanner,
+            user
         })
+    }
+    return response.status(404).json({
+        status:"error",
+        message:"No deal found",
+        showBanner,
+        user
+    })
         
 
     }catch(error:any){
