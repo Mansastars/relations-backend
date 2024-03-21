@@ -20,8 +20,8 @@ export const stripeSession = async (plan: string) => {
                     quantity: 1
                 },
             ],
-            success_url: "http://localhost:5173/successful-payment?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url: "http://localhost:5173/cancel-payment"
+            success_url: `https://${process.env.DOMAIN}/successful-payment?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `https://${process.env.DOMAIN}/cancel-payment`
         });
         return session;
     } catch (error: any) {
