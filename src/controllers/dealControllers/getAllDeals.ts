@@ -18,12 +18,26 @@ export const getAllDeals = async (request: JwtPayload, response: Response) => {
 
         //to show banner
         let showBanner = null
-        if (numberOfDays < 7 && user.subscription_name === null) {
+        if (numberOfDays <= 7 && user.subscription_name === null) {
             showBanner = true
         } else {
             showBanner = false
         }
+        //to show billing page
+        let showBilling = null
+        if(numberOfDays > 7 && user.subscription_name === null){
+            showBilling = true
+        }else{
+            showBilling = false
+        }
 
+        if(showBilling === true){
+            return response.status(200).json({
+                status:`success`,
+                message:`You currently do not have an active subscription`,
+                showBilling
+            })
+        }
         if (deals.length > 0) {
             return response.status(200).json({
                 status: "success",
