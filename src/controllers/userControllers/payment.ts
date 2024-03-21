@@ -31,14 +31,23 @@ export const stripeSession = async (plan: string) => {
 
 
 export const payment = async (request: JwtPayload, response: Response) => {
-    const [monthly, annually] = ["price_1OZfz6E2tszo5U9y32IqTLyV", "price_1OZgFpE2tszo5U9y7Qf1zkWb"]
+    const [earlyBirdMonthly, earlyBirdYearly] = ['price_1OWg1RE2tszo5U9yuSBujW2x', 'price_1OtuhCE2tszo5U9yU2nURHol']
+    const [basicMonthly, basicYearly] = ['price_1NflQWE2tszo5U9ytdElmOu6', 'price_1Nt7EsE2tszo5U9yKKiIhy7V']
+    const [standardMonthly, standardYearly] = ["price_1NcTZ7E2tszo5U9y2fVeVLtX", "price_1O4NzFE2tszo5U9ymzWC8aKS"]
+    const [premiumMonthly, premiumYearly] = ['price_1OkYR0E2tszo5U9yl09Nu5VP', 'price_1OkYWfE2tszo5U9ynYA17JJU']
 
     const { plan, userId, } = request.body;
 
     let planId = "";
 
-    if (plan == 29.99) planId = monthly;
-    else if (plan == 300) planId = annually;
+    if (plan == 23.99) planId = earlyBirdMonthly
+    else if (plan == 288.00) planId = earlyBirdYearly
+    else if (plan == 14.99) planId = basicMonthly
+    else if (plan == 170.00) planId = basicYearly
+    else if (plan == 29.99) planId = standardMonthly;
+    else if (plan == 300) planId = standardYearly;
+    else if (plan == 99.99) planId = premiumMonthly
+    else if (plan == 1000.00) planId = premiumYearly
 
     try {
         const session = await stripeSession(planId);
@@ -85,7 +94,17 @@ export const successPayment = async (request: JwtPayload, response: Response) =>
             const subscriptionId = session.subscription
             const subscription = await stripe.subscriptions.retrieve(subscriptionId);
             const planId = subscription.plan.id;
-            const planType = subscription.plan.amount === 2999 ? "Standard" : "Premium";
+
+            let planType = ''
+            if(subscription.plan.amount === 2399) planType = "Early-Bird-Monthly"
+            if(subscription.plan.amount === 28800) planType = "Early-Bird-Yearly"
+            if(subscription.plan.amount === 1499) planType = "Basic-Monthly"
+            if(subscription.plan.amount === 17000) planType = "Basic-Yearly"
+            if(subscription.plan.amount === 2999) planType = "Standard-Monthly"
+            if(subscription.plan.amount === 30000) planType = "Standard-Yearly"
+            if(subscription.plan.amount === 9999) planType = "Premium-Monthly"
+            if(subscription.plan.amount === 100000) planType = "Premium-Yearly"
+
             const startDate = new Date(moment.unix(subscription.current_period_start).toDate().toISOString());
             const endDate = new Date(moment.unix(subscription.current_period_end).toDate().toISOString());
             const durationInSeconds = subscription.current_period_end - subscription.current_period_start;
@@ -112,16 +131,16 @@ export const successPayment = async (request: JwtPayload, response: Response) =>
                 where: {
                     id: user?.dataValues.user_id
                 }
-            }) 
+            })
             return response.status(200).json({
-                status:`success`,
+                status: `success`,
                 message: "Payment Successful"
             });
         }
 
         else {
             return response.json({
-                status:`error`,
+                status: `error`,
                 message: "Payment failed"
             });
         }
