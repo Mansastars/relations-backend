@@ -48,12 +48,21 @@ export const userLogin = async (request: Request, response: Response) => {
       showBanner = false
     }
 
+    //to show billing page
+    let showBilling = null
+    if(numberOfDays > 7 && user.subscription_name === null){
+        showBilling = true
+    }else{
+        showBilling = false
+    }
+
     return response.status(200).json({
       message: `Welcome back ${user.first_name}`,
       token,
       user,
       numberOfDaysLeft,
-      showBanner 
+      showBanner,
+      showBilling
     });
   } catch (error: any) {
     console.log(error.message);
