@@ -35,7 +35,10 @@ export const getAllDeals = async (request: JwtPayload, response: Response) => {
             return response.status(200).json({
                 status:`success`,
                 message:`You currently do not have an active subscription`,
-                showBilling
+                showBilling,
+                showBanner,
+                user,
+                deals
             })
         }
         if (deals.length > 0) {
@@ -53,6 +56,7 @@ export const getAllDeals = async (request: JwtPayload, response: Response) => {
                 message: "No deal found",
                 showBanner,
                 user,
+                deals,
                 showBilling
             })
         } else {
