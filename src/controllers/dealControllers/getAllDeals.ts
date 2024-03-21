@@ -44,14 +44,16 @@ export const getAllDeals = async (request: JwtPayload, response: Response) => {
                 message: `You currently have ${deals.length} deals`,
                 deals,
                 showBanner,
-                user
+                user,
+                showBilling
             })
         } else if (deals.length === 0) {
             return response.status(200).json({
                 status: "success",
                 message: "No deal found",
                 showBanner,
-                user
+                user,
+                showBilling
             })
         } else {
             return response.status(400).json({
