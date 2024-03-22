@@ -5,7 +5,7 @@ import Deal from "../../models/dealModel/dealModel";
 
 export const editDeal = async(request:JwtPayload, response: Response) =>{
     try{
-        const {deal_name,dead_line,signed_value } = request.body
+        const {deal_name,dead_line,deal_size } = request.body
         const deal_id = request.params.id
         const owner_id = request.user.id
         
@@ -19,7 +19,7 @@ export const editDeal = async(request:JwtPayload, response: Response) =>{
         const updatedDeal = await Deal.update({
             deal_name: deal_name || deal.deal_name, 
             dead_line: dead_line || deal.dead_line, 
-            signed_value: signed_value || deal.signed_value,
+            deal_size: deal_size || deal.deal_size,
             updatedAt: new Date()
             },{where:{id:deal_id, owner_id}
         })
