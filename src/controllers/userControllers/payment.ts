@@ -14,6 +14,7 @@ export const stripeSession = async (plan: string) => {
     try {
         const session = await stripe.checkout.sessions.create({
             mode: "subscription",
+            allow_promotion_codes: true,
             line_items: [
                 {
                     price: plan,
