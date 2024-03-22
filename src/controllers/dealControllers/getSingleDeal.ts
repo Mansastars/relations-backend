@@ -14,8 +14,8 @@ export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
                 message:"Deal not found",
             })
         }
-
-        let deal_size = data.deal_size
+        let dealSize = 0
+        let deal_size = 0
         let negotiation_value = 0
         let signed_value = 0
         const dealContact = await Contact.findAll({where:{owner_id:userId, deal_id:dealId}})
@@ -28,11 +28,16 @@ export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
                 signed_value += dealContact[i].deal_size
             }
         }
+        if(data.deal_size === 0){
+            dealSize = deal_size
+        }else{
+            dealSize = data.deal_size
+        }
         const deal = {
             id: data.id,
             owner_id: data.owner_id,
             deal_name: data.deal_name,
-            deal_size: deal_size,
+            deal_size: dealSize,
             dead_line: data.dead_line,
             negotiation_value: negotiation_value,
             signed_value: signed_value,
