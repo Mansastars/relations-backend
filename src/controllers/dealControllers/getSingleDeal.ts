@@ -15,7 +15,7 @@ export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
             })
         }
 
-        let deal_size = 0
+        let deal_size = data.deal_size
         let negotiation_value = 0
         let signed_value = 0
         const dealContact = await Contact.findAll({where:{owner_id:userId, deal_id:dealId}})
