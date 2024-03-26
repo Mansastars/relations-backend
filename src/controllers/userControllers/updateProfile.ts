@@ -24,11 +24,12 @@ export const updateProfile = async (request: JwtPayload, response: Response) => 
         message: "Profile updated",
         data: updatedUser
       });
-    }
+    }else{
     return response.status(400).json({
       status: "error",
       message: "Unable to update profile",
     });
+  }
   } catch (error: any) {
     console.log(error.message);
     return response.status(500).json({
