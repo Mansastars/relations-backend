@@ -42,6 +42,7 @@ export const registerUser = async (request: Request, response: Response) => {
       role: role.USER,
       on_trial: true,
       is_subscribed: true,
+      isVerified: false,
       isBlocked: false,
       createdAt: new Date(),
       updatedAt: new Date(),

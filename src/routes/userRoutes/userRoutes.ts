@@ -7,6 +7,7 @@ import { changePassword } from "../../controllers/userControllers/changePassword
 import { updateProfile } from "../../controllers/userControllers/updateProfile";
 import { payment, successPayment,  } from "../../controllers/userControllers/payment";
 import { deleteUser } from "../../controllers/userControllers/deleteUser";
+import { updateEmail } from "../../controllers/userControllers/updateEmail";
 
 
 const router = express.Router();
@@ -19,5 +20,6 @@ router.post("/register", registerUser)
 router.post("/payment", generalAuthoriser, payment)
 router.get("/successful-payment", generalAuthoriser, successPayment)
 router.delete("/delete-account", generalAuthoriser, deleteUser)
+router.patch("/update-email", generalAuthoriser, updateEmail)
 
 export default router;
