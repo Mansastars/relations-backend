@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.patch("/change-password", generalAuthoriser, changePassword)
 router.get("/profile", generalAuthoriser, getUserProfile)
-router.patch("update-profile", generalAuthoriser, updateProfile)
+router.patch("/update-profile", generalAuthoriser, updateProfile)
 router.post("/login", userLogin)
 router.post("/register", registerUser)
 router.post("/payment", generalAuthoriser, payment)
