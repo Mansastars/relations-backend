@@ -13,7 +13,7 @@ import { getSingleUser } from "../../controllers/userControllers/getSingleUser";
 
 const router = express.Router();
 
-router.patch("/change-password", changePassword)
+router.patch("/change-password", generalAuthoriser, changePassword)
 router.get("/profile", generalAuthoriser, getUserProfile)
 router.patch("update-profile", generalAuthoriser, updateProfile)
 router.post("/login", userLogin)

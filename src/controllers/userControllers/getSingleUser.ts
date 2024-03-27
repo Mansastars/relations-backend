@@ -5,7 +5,6 @@ import User from "../../models/userModel/userModel";
 export const getSingleUser = async (request:JwtPayload ,response:Response) => {
     try{
         const userId = request.user.id;
-        const contactId = request.params.contactId
 
         const user = await User.findOne({where: {id:userId}})
         if (!user){
