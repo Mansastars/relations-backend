@@ -57,6 +57,12 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
       findDeal,
     });
   } catch (error: any) {
+    if(error.message === 'jwt expired'){
+      return response.status(500).json({
+        status: `error`,
+        navigate: true,
+      });
+    }
     return response.status(500).json({
       status: `error`,
       method: request.method,

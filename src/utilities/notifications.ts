@@ -26,3 +26,19 @@ export const verificationMail = async (to: string, token: string) => {
     console.log(err.message);
   }
 };
+
+export const resetPaaswordMail = async (to: string, token: string) => {
+    try {
+      const response = await transport.sendMail({
+        from: `${process.env.GMAIL_USER}`,
+        to,
+        subject: "PLEASE VERIFY YOUR ACCOUNT",
+        html: `<div width="50%" style="text-align: center; padding: 25px; border-radius: 5px; border: 2px solid #27AE60;"><h1>Welcome to Deca Events</h1>
+              <p style="margin-bottom: 10px">Click the button below to verify your account</p>
+              <br />
+              <a href="https://${process.env.DOMAIN}/${token}" style="text-align: center; padding: 10px; border-radius: 10px; background: #27AE60; text-decoration: none; color: white;">Verify Account</a></div>`,
+      });
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
