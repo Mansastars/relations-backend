@@ -12,7 +12,7 @@ export const hashPassword = async (password: string) => {
 };
 
 export const generateToken = (data: any) => {
-  return jwt.sign(data, `${process.env.APP_SECRET}`, {expiresIn: "1d"});
+  return jwt.sign(data, `${process.env.APP_SECRET}`, {expiresIn: "1m"});
 };
 
 export const generateRegisterToken = (data: any) => {
