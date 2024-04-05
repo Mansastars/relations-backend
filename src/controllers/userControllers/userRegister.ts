@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import User, { UserAttributes, role } from "../../models/userModel/userModel";
 import { v4 } from "uuid";
-import { generateRegisterToken, hashPassword } from "../../helpers/helpers";
+import { generateVerificationToken, hashPassword } from "../../helpers/helpers";
+import { SendEmailVerification } from "../../utilities/notifications";
 
 export const registerUser = async (request: Request, response: Response) => {
   try {
@@ -57,9 +58,16 @@ export const registerUser = async (request: Request, response: Response) => {
         message: `User not registered, contact admin`,
       });
     }
+
+    const data ={
+      id:userId,
+      email:email
+    }
+    const token = generateVerificationToken(data)
+    SendEmailVerification(email, token)
     return response.status(200).json({
       status: `success`,
-      message: `User Registered Successfully`,
+      message: `Registration Successfully and verification email sent`,
       findUser,
     });
   } catch (error: any) {

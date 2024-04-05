@@ -16,10 +16,11 @@ export const userLogin = async (request: Request, response: Response) => {
 
     if (!user1) {
       return response.status(404).json({
-        status: `Access denied`,
+        status: `error`,
         message: `User with the email ${email} is not registered`,
       });
     }
+    
     const validate = await bcrypt.compare(password, user1.password);
 
     if (!validate) {

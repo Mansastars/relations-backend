@@ -9,6 +9,8 @@ import { payment, successPayment,  } from "../../controllers/userControllers/pay
 import { deleteUser } from "../../controllers/userControllers/deleteUser";
 import { updateEmail } from "../../controllers/userControllers/updateEmail";
 import { getSingleUser } from "../../controllers/userControllers/getSingleUser";
+import { verifyUser } from "../../controllers/userControllers/verifyUser";
+import { resendVerification } from "../../controllers/userControllers/resendVerificationEmail";
 
 
 const router = express.Router();
@@ -23,5 +25,7 @@ router.get("/successful-payment", generalAuthoriser, successPayment)
 router.delete("/delete-account", generalAuthoriser, deleteUser)
 router.patch("/update-email", generalAuthoriser, updateEmail)
 router.get("/single-user", generalAuthoriser, getSingleUser)
+router.get("/verify:token", verifyUser)
+router.post("/resend-verification", resendVerification)
 
 export default router;

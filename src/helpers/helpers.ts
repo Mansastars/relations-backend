@@ -15,7 +15,7 @@ export const generateToken = (data: any) => {
   return jwt.sign(data, `${process.env.APP_SECRET}`, {expiresIn: "1d"});
 };
 
-export const generateRegisterToken = (data: any) => {
+export const generateVerificationToken = (data: any) => {
   return jwt.sign(data, `${process.env.APP_SECRET}`, {expiresIn: "20m"});
 };
 
