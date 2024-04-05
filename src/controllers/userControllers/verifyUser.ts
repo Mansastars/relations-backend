@@ -12,7 +12,7 @@ export const verifyUser = async (request: JwtPayload, response: Response) => {
     })) as unknown as UserAttributes;
     if (user) {
       await User.update({ isVerified: true }, { where: { id: userId } });
-      return response.status(400).json({
+      return response.status(200).json({
         status: `success`,
         message: `You have been successfully Verified`,
       });
