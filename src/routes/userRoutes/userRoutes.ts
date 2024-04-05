@@ -11,6 +11,8 @@ import { updateEmail } from "../../controllers/userControllers/updateEmail";
 import { getSingleUser } from "../../controllers/userControllers/getSingleUser";
 import { verifyUser } from "../../controllers/userControllers/verifyUser";
 import { resendVerification } from "../../controllers/userControllers/resendVerificationEmail";
+import { forgetPassword } from "../../controllers/userControllers/forgetPassword";
+import { resetPassword } from "../../controllers/userControllers/resetPassword";
 
 
 const router = express.Router();
@@ -27,5 +29,7 @@ router.patch("/update-email", generalAuthoriser, updateEmail)
 router.get("/single-user", generalAuthoriser, getSingleUser)
 router.get("/verify:token", verifyUser)
 router.post("/resend-verification", resendVerification)
+router.post("/forgot-password", forgetPassword)
+router.post("/reset-password/:token", resetPassword)
 
 export default router;
