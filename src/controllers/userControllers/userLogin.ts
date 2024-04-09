@@ -20,7 +20,7 @@ export const userLogin = async (request: Request, response: Response) => {
         message: `User with the email ${email} is not registered`,
       });
     }
-    
+
     const validate = await bcrypt.compare(password, user1.password);
 
     if (!validate) {
@@ -72,7 +72,7 @@ export const userLogin = async (request: Request, response: Response) => {
             plan_duration: String(durationInDays),
             updatedAt: new Date(),
           }, { where: { user_id: user1.id } })
-        }else {
+        } else {
           const createUserPayment = await Payment.create({
             id: v4(),
             user_id: user1.id,
@@ -94,14 +94,47 @@ export const userLogin = async (request: Request, response: Response) => {
           subscription_start_date: startDate,
           subscription_end_date: endDate,
           subscription_name: planType,
-          on_trial:false
+          on_trial: false
         }, {
           where: {
             id: user1.id
           }
         })
-        
+
       }
+    } else {
+      const user = (await User.findOne({ where: { email: email } })) as unknown as UserAttributes;
+
+      //To calculate number of days from account creation
+      const currentDate: any = new Date()
+      const userCreatedDate: any = user1.createdAt
+      const numberOfDays: any = Number((currentDate - userCreatedDate) / (1000 * 60 * 60 * 24))
+      const numberOfDaysLeft = 7 - numberOfDays
+
+      //to show banner
+      let showBanner = null
+      if (numberOfDays < 7 && user.subscription_name === null) {
+        showBanner = true
+      } else {
+        showBanner = false
+      }
+
+      //to show billing page
+      let showBilling = null
+      if (numberOfDays > 7 && user.subscription_name === null) {
+        showBilling = true
+      } else {
+        showBilling = false
+      }
+
+      return response.status(200).json({
+        message: `Welcome back ${user.first_name}`,
+        token,
+        user,
+        numberOfDaysLeft,
+        showBanner,
+        showBilling
+      });
     }
 
     const user = (await User.findOne({ where: { email: email } })) as unknown as UserAttributes;
