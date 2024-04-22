@@ -165,7 +165,7 @@ export const customerPortal = async (request: JwtPayload, response: Response) =>
         const customerId = customer.data[0].id
 
         const session = await stripe.billingPortal.sessions.create({
-            customer: `${customerId}`,
+            customer: customerId,
             return_url: `https://${process.env.DOMAIN}/alldashboards`,
         });
         if(session.url){
