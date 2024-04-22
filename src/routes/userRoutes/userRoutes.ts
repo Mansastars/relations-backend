@@ -31,6 +31,6 @@ router.get("/verify/:token", verifyUser)
 router.post("/resend-verification", resendVerification)
 router.post("/forgot-password", forgetPassword)
 router.post("/reset-password/:token", resetPassword)
-router.post("/customer-portal", customerPortal)
+router.post("/customer-portal", generalAuthoriser, customerPortal)
 
 export default router;
