@@ -154,3 +154,38 @@ export const successPayment = async (request: JwtPayload, response: Response) =>
         })
     }
 }
+
+
+
+export const customerPortal = async (request: JwtPayload, response: Response) => {
+    try {
+        const email = request.body.email
+
+        const customer = await stripe.customers.list({ email: email });
+        const customerId = customer.data[0].id
+
+        const session = await stripe.billingPortal.sessions.create({
+            customer: `${customerId}`,
+            return_url: 'https://crm.mansastars.com/alldashboards',
+        });
+        if(session.url){
+            return response.status(200).json({
+                status: `success`,
+                message: "Navigating to Customer Portal",
+                url:session.url
+            });
+        }else{
+            return response.status(200).json({
+                status: `error`,
+                message: "Unable to access Customer Portal, please login",
+            });
+        }
+        
+    }catch(error:any){
+        console.log(error.message)
+        return response.status(500).json({
+            status: `error`,
+            message: `Something went wrong, Please try again`
+        })
+    }
+}

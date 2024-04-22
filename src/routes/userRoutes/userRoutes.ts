@@ -5,7 +5,7 @@ import { userLogin } from "../../controllers/userControllers/userLogin";
 import { getUserProfile } from "../../controllers/userControllers/getUserProfile";
 import { changePassword } from "../../controllers/userControllers/changePassword";
 import { updateProfile } from "../../controllers/userControllers/updateProfile";
-import { payment, successPayment,  } from "../../controllers/userControllers/payment";
+import { customerPortal, payment, successPayment,  } from "../../controllers/userControllers/payment";
 import { deleteUser } from "../../controllers/userControllers/deleteUser";
 import { updateEmail } from "../../controllers/userControllers/updateEmail";
 import { getSingleUser } from "../../controllers/userControllers/getSingleUser";
@@ -31,5 +31,6 @@ router.get("/verify/:token", verifyUser)
 router.post("/resend-verification", resendVerification)
 router.post("/forgot-password", forgetPassword)
 router.post("/reset-password/:token", resetPassword)
+router.post("/customer-portal", customerPortal)
 
 export default router;
