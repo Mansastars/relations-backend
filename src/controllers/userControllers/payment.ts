@@ -175,7 +175,7 @@ export const customerPortal = async (request: JwtPayload, response: Response) =>
                 url:session.url
             });
         }else{
-            return response.status(200).json({
+            return response.status(400).json({
                 status: `error`,
                 message: "Unable to access Customer Portal, please login",
             });
