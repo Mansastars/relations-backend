@@ -32,8 +32,8 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
     }
     const deadLine = date.toISOString()
     const user = await User.findOne({where:{id:userId}})
-    console.log(user?.dataValues.subscription_name)
-    if(user?.dataValues.subscription_name == ("Basic-Monthly" ||"Basic-Yearly")){
+    const deals = await Deal.findAll({where:{owner_id:userId}})
+    if((user?.dataValues.subscription_name == ("Basic-Monthly" ||"Basic-Yearly")) && deals.length>0){
       return response.status(200).json({
         status: `error`,
         message: `You have to upgrade your subscription to create a neww dashboard`,
