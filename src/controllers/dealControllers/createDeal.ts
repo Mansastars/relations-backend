@@ -2,6 +2,7 @@ import { Response } from "express";
 import { v4 } from "uuid";
 import { JwtPayload } from "jsonwebtoken";
 import Deal, { DealAttributes } from "../../models/dealModel/dealModel";
+import User from "../../models/userModel/userModel";
 
 export const createDeal = async (request: JwtPayload, response: Response) => {
   try {
@@ -30,6 +31,14 @@ export const createDeal = async (request: JwtPayload, response: Response) => {
       date.setDate(0);
     }
     const deadLine = date.toISOString()
+    const user = await User.findOne({where:{id:userId}})
+    console.log(user?.dataValues.subscription_name)
+    if(user?.dataValues.subscription_name == ("Basic-Monthly" ||"Basic-Yearly")){
+      return response.status(200).json({
+        status: `error`,
+        message: `You have to upgrade your subscription to create a neww dashboard`,
+      });
+    }
     await Deal.create({
       id: dealId,
       owner_id: userId,

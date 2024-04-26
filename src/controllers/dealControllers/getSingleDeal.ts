@@ -53,7 +53,7 @@ export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
         
        
     }catch(error:any){
-        console.log(error.message);
+        console.log('ERROR:',error.message);
         return response.status(500).json({
             status:"error",
             message:"Internal Server Error"
