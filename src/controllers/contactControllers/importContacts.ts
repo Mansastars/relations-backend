@@ -6,7 +6,7 @@ import { where } from "sequelize";
 import { v4 } from "uuid";
 
 export const importContacts = async(request:JwtPayload, response:Response)=>{
-    const csv = request.body.database;
+    const csv = request.body.data;
     const user = request.user.id;
     try{
         const userExist = await User.findOne({where:{id:user}})
