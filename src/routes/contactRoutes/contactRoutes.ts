@@ -14,6 +14,7 @@ import { getResearchContacts } from "../../controllers/contactControllers/getCon
 import { getReviewContacts } from "../../controllers/contactControllers/getContactsInReviewStage";
 import { deleteContact } from "../../controllers/contactControllers/deleteContact";
 import { getSingleContact } from "../../controllers/contactControllers/getSingleContact";
+import { importContacts } from "../../controllers/contactControllers/importContacts";
 
 const router = express.Router();
 
@@ -31,5 +32,6 @@ router.get("/research-contacts", generalAuthoriser, getResearchContacts)
 router.get("/review-contacts", generalAuthoriser, getReviewContacts)
 router.delete("/delete-contact/:id/:contact", generalAuthoriser, deleteContact)
 router.get("/single-contact/:id/:contactId", generalAuthoriser,getSingleContact)
+router.post("/import-contacts", generalAuthoriser, importContacts)
 
 export default router;
