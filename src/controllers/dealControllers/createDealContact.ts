@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { JwtPayload } from "jsonwebtoken";
 import Contact, { ContactAttributes } from "../../models/contactModel/contactModel";
 import CompletedContact from "../../models/completedContactsModel/completedContactsModel";
+import GeneralContact from "../../models/generalContacts/generalContacts";
 
 export const createDealContact = async (request: JwtPayload, response: Response) => {
   try {
@@ -54,6 +55,22 @@ export const createDealContact = async (request: JwtPayload, response: Response)
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+
+    await GeneralContact.create({
+      title: title || ``,
+      id: v4(),
+      owner_id: userId,
+      first_name:first_name.toLowerCase(),
+      last_name: last_name.toLowerCase(),
+      organization_name: organization_name || ``,
+      linkedin_url: linkedin_url || ``,
+      gender: gender || ``,
+      profile_pic: profile_pic || ``,
+      email: email || ``,
+      phone_number: phone_number || ``,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+  });
 
     if (!newContact) {
       return response.status(200).json({

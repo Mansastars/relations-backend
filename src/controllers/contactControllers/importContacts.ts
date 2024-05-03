@@ -4,6 +4,7 @@ import User from "../../models/userModel/userModel";
 import Contact from "../../models/contactModel/contactModel";
 import { where } from "sequelize";
 import { v4 } from "uuid";
+import GeneralContact from "../../models/generalContacts/generalContacts";
 
 export const importContacts = async(request:JwtPayload, response:Response)=>{
     const csv = request.body.data;
@@ -24,23 +25,18 @@ export const importContacts = async(request:JwtPayload, response:Response)=>{
         }
 
         const imported = csv.map(async(contact:any)=>{
-            await Contact.create({
+            await GeneralContact.create({
                 title: contact.title || ``,
                 id: v4(),
                 owner_id: user,
-                deal_id:`general`,
-                first_name:(contact.first_name).toLowerCase() || ``,
-                last_name: (contact.last_name).toLowerCase() || ``,
+                first_name:(contact.first_name || ``).toLowerCase(),
+                last_name: (contact.last_name || ``).toLowerCase(),
                 organization_name: contact.organization_name || ``,
                 linkedin_url: contact.linkedin_url || ``,
                 gender: contact.gender || ``,
                 profile_pic: contact.profile_pic || ``,
-                deal_size: contact.deal_size || 0,
                 email: contact.email || ``,
                 phone_number: contact.phone_number || ``,
-                stage:`none`,
-                meeting_date: contact.meeting_date || null,
-                notes: contact.notes || 'No notes available',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });
