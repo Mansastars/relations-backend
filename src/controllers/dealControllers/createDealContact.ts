@@ -70,7 +70,7 @@ export const createDealContact = async (request: JwtPayload, response: Response)
       phone_number: phone_number || ``,
       createdAt: new Date(),
       updatedAt: new Date(),
-  });
+    });
 
     if (!newContact) {
       return response.status(200).json({

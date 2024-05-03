@@ -1,22 +1,22 @@
 import { JwtPayload } from "jsonwebtoken";
 import {Response} from 'express'
-import Contact from "../../models/contactModel/contactModel";
+import GeneralContact from "../../models/generalContacts/generalContacts";
 
 export const getAllContacts = async (request:JwtPayload ,response:Response) => {
     try{
         const userId = request.user.id;
-        const contacts = await Contact.findAll({where: {owner_id:userId}})
-        if (contacts.length === 0){
+        const allContacts = await GeneralContact.findAll({where: {owner_id:userId}})
+        if (allContacts.length === 0){
             return response.status(200).json({
                 status:"success",
                 message:"You currently have no contacts",
             })
         }
-        if (contacts.length > 0){
+        if (allContacts.length > 0){
             return response.status(200).json({
                 status:"success",
-                message:`You currently have ${contacts.length} contacts`,
-                contacts
+                message:`You currently have ${allContacts.length} contacts`,
+                allContacts
             })
         }
         return response.status(404).json({

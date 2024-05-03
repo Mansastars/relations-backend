@@ -18,7 +18,7 @@ import { importContacts } from "../../controllers/contactControllers/importConta
 
 const router = express.Router();
 
-router.get("/contacts", generalAuthoriser, getAllContacts)
+router.get("/allcontacts", generalAuthoriser, getAllContacts)
 router.get("/offer-contacts", generalAuthoriser, getOfferContacts)
 router.get("/contacted-contacts", generalAuthoriser, getContactedContacts)
 router.get("/deal-contacts", generalAuthoriser, getDealContacts)
