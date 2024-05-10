@@ -5,9 +5,9 @@ import Contact from "../../models/contactModel/contactModel";
 
 export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
     try{
-        const userId = request.user.id;
+        // const userId = request.user.id;
         const dealId = request.params.id
-        const data = await Deal.findOne({where: {id:dealId, owner_id:userId}})
+        const data = await Deal.findOne({where: {id:dealId}})
         if (!data){
             return response.status(400).json({
                 status:"error",
@@ -18,7 +18,7 @@ export const getSingleDeal = async (request:JwtPayload ,response:Response) => {
         let deal_size = 0
         let negotiation_value = 0
         let signed_value = 0
-        const dealContact = await Contact.findAll({where:{owner_id:userId, deal_id:dealId}})
+        const dealContact = await Contact.findAll({where:{deal_id:dealId}})
         for(let i = 0; i < dealContact.length; i++){
             deal_size += dealContact[i].deal_size
             if(dealContact[i].stage === "Negotiation"){

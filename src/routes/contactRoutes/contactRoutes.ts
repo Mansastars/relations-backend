@@ -1,6 +1,5 @@
 import express from "express";
 import { generalAuthoriser } from "../../middleware/authorization";
-import { getAllContacts } from "../../controllers/contactControllers/getAllContact";
 import { getContactedContacts } from "../../controllers/contactControllers/getContactsInContactedStage";
 import { getOfferContacts } from "../../controllers/contactControllers/getContactInOfferStage";
 import { getDealContacts } from "../../controllers/contactControllers/getContactsInDealStage";
@@ -15,10 +14,12 @@ import { getReviewContacts } from "../../controllers/contactControllers/getConta
 import { deleteContact } from "../../controllers/contactControllers/deleteContact";
 import { getSingleContact } from "../../controllers/contactControllers/getSingleContact";
 import { importContacts } from "../../controllers/contactControllers/importContacts";
+import { exportContacts } from "../../controllers/contactControllers/exportContacts";
+import { getAllContacts } from "../../controllers/contactControllers/getAllContacts";
 
 const router = express.Router();
 
-router.get("/allcontacts", generalAuthoriser, getAllContacts)
+router.get("/all-contacts", generalAuthoriser, getAllContacts)
 router.get("/offer-contacts", generalAuthoriser, getOfferContacts)
 router.get("/contacted-contacts", generalAuthoriser, getContactedContacts)
 router.get("/deal-contacts", generalAuthoriser, getDealContacts)
@@ -33,5 +34,6 @@ router.get("/review-contacts", generalAuthoriser, getReviewContacts)
 router.delete("/delete-contact/:id/:contact", generalAuthoriser, deleteContact)
 router.get("/single-contact/:id/:contactId", generalAuthoriser,getSingleContact)
 router.post("/import-contacts", generalAuthoriser, importContacts)
+router.get("/export-contacts", generalAuthoriser, exportContacts)
 
 export default router;

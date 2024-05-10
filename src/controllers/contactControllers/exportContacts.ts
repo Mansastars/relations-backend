@@ -2,7 +2,7 @@ import { JwtPayload } from "jsonwebtoken";
 import {Response} from 'express'
 import GeneralContact from "../../models/generalContacts/generalContacts";
 
-export const getAllContacts = async (request:JwtPayload ,response:Response) => {
+export const exportContacts = async (request:JwtPayload ,response:Response) => {
     try{
         const userId = request.user.id;
         const allContacts = await GeneralContact.findAll({where: {owner_id:userId}})

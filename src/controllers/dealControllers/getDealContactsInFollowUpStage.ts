@@ -5,10 +5,10 @@ import { formatContacts } from "../../helpers/helpers";
 
 export const getFollowUpContacts = async (request:JwtPayload ,response:Response) => {
     try{
-        const userId = request.user.id;
+        // const userId = request.user.id;
         const deal_id = request.params.id;
         const stage = "Follow up/ Add to Newsletter"
-        const contacts = await Contact.findAll({where: {owner_id:userId, stage:stage, deal_id}})
+        const contacts = await Contact.findAll({where: {stage:stage, deal_id}})
         const output = formatContacts(contacts)
         if (contacts.length === 0 || undefined){
             return response.status(200).json({
