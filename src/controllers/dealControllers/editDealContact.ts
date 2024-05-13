@@ -1,6 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 import { Response } from "express";
 import Contact from "../../models/contactModel/contactModel";
+import Deal from "../../models/dealModel/dealModel";
 
 
 export const editDealContact = async (request: JwtPayload, response: Response) => {
@@ -30,7 +31,14 @@ export const editDealContact = async (request: JwtPayload, response: Response) =
                 message: `unable to edit contact at this time`
             })
         }
-
+        const dealOwner = await Deal.findOne({where:{id:dealId}})
+        console.log(dealOwner)
+        if(userId !== dealOwner?.dataValues.owner_id ){
+          return response.status(400).json({
+            status: `error`,
+            message: `You can not edit a contact on this dashboard`,
+          });
+        }
         const updatedContact = await Contact.update({
             title: title || findContact.title,
             first_name: first_name || findContact.first_name,

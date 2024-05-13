@@ -4,6 +4,7 @@ import { JwtPayload } from "jsonwebtoken";
 import Contact, { ContactAttributes } from "../../models/contactModel/contactModel";
 import CompletedContact from "../../models/completedContactsModel/completedContactsModel";
 import GeneralContact from "../../models/generalContacts/generalContacts";
+import Deal from "../../models/dealModel/dealModel";
 
 export const createDealContact = async (request: JwtPayload, response: Response) => {
   try {
@@ -33,6 +34,13 @@ export const createDealContact = async (request: JwtPayload, response: Response)
       return response.status(400).json({
         status: `error`,
         message: `${first_name} ${last_name} already exists on this deal`,
+      });
+    }
+    const dealOwner = await Deal.findOne({where:{id:deal_id}})
+    if(userId !== dealOwner?.dataValues.owner_id ){
+      return response.status(400).json({
+        status: `error`,
+        message: `You can not add a contact to this dashboard`,
       });
     }
     const newContact = await Contact.create({
