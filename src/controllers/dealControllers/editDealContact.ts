@@ -32,7 +32,6 @@ export const editDealContact = async (request: JwtPayload, response: Response) =
             })
         }
         const dealOwner = await Deal.findOne({where:{id:dealId}})
-        console.log(dealOwner)
         if(userId !== dealOwner?.dataValues.owner_id ){
           return response.status(400).json({
             status: `error`,
