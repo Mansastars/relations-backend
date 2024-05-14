@@ -137,7 +137,7 @@ export const userLogin = async (request: Request, response: Response) => {
 
     const allcontacts = await GeneralContact.findAll({where:{owner_id:user.id}})
     allcontacts.map(async(contact)=>{
-      if(contact.first_name[0] === '' && contact.last_name[0] === '' && contact.email[0] === ''){
+      if(contact.first_name === '' && contact.last_name === '' && contact.email === ''){
         await GeneralContact.destroy({where:{id:contact.id}})
       }
     })
