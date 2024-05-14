@@ -5,6 +5,7 @@ import { generateToken } from "../../helpers/helpers";
 import moment from "moment";
 import Payment from "../../models/paymentModel/paymentModel";
 import { v4 } from "uuid";
+import GeneralContact from "../../models/generalContacts/generalContacts";
 const stripe = require("stripe")(process.env.SECRET_KEY)
 
 
@@ -133,6 +134,13 @@ export const userLogin = async (request: Request, response: Response) => {
     } else {
       showBilling = false
     }
+
+    const allcontacts = await GeneralContact.findAll({where:{owner_id:user.id}})
+    allcontacts.map(async(contact)=>{
+      if(contact.first_name[0] === ' ' && contact.last_name[0] === ' ' && contact.email[0] === ' '){
+        await GeneralContact.destroy({where:{id:contact.id}})
+      }
+    })
 
     return response.status(200).json({
       message: `Welcome back ${user.first_name}`,
