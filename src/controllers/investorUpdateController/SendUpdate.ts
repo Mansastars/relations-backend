@@ -12,7 +12,17 @@ export const sendUpdate = async (request:JwtPayload, response:Response)=>{
                 message:`You have to login/SignUp to use this feature`
             })
         }
-        const recipients = data.recipients_emails.split(' ').join().split(',')
+        const emails:string = data.recipients_emails
+        function filterEmails(recipients:string) {
+            // Split the string by commas
+            let emails = recipients.split(',');
+        
+            // Trim spaces from each email and filter out any empty strings
+            emails = emails.map(email => email.trim()).filter(email => email !== '');
+        
+            return emails;
+        }
+        const recipients = filterEmails(emails)
         console.log(recipients)
         for(let i =0; i <recipients.length, i++;){
             SendInvestorsUpdate(
