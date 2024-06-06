@@ -68,6 +68,7 @@ export const SendInvestorsUpdate =
     founders_message:string,
     company_name:string,
     targets:string,
+    logoUrl:string
     )=>{
   try{
     const response = await transport.sendMail({
@@ -75,6 +76,8 @@ export const SendInvestorsUpdate =
       to,
       subject,
       html:`
+      Kindly find below the Investor Update report of ${company_name}.
+
       <body style="margin: 0; padding: 0; background-color: #8080801a; font-size: 1rem; font-family: Inter">
       <!-- Email template Begins -->
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
@@ -82,7 +85,7 @@ export const SendInvestorsUpdate =
               <td style="padding: 100px 20px 120px 20px">
                   <!-- Logo Container -->
                   <div style="display: flex; justify-content: center; align-items: center; padding-bottom: 30px;">
-                      <img src="https://assets-global.website-files.com/656a05e80b02929dac61def9/656c9f5f7a03960364b37e73_Screenshot_2023-02-12_at_22.15.46-removebg-preview%20(1)-p-500.png"
+                      <img src=${logoUrl}
                           alt="Respondent's Logo" style="max-width: 20%; display: block; margin: 0 auto;" />
                   </div>
                   <!-- Email Content -->
