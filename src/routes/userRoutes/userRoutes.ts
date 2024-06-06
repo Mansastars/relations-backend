@@ -13,6 +13,7 @@ import { verifyUser } from "../../controllers/userControllers/verifyUser";
 import { resendVerification } from "../../controllers/userControllers/resendVerificationEmail";
 import { forgetPassword } from "../../controllers/userControllers/forgetPassword";
 import { resetPassword } from "../../controllers/userControllers/resetPassword";
+import { sendUpdate } from "../../controllers/investorUpdateController/SendUpdate";
 
 
 const router = express.Router();
@@ -32,5 +33,6 @@ router.post("/resend-verification", resendVerification)
 router.post("/forgot-password", forgetPassword)
 router.post("/reset-password/:token", resetPassword)
 router.post("/customer-portal", generalAuthoriser, customerPortal)
+router.post("/send-update", generalAuthoriser, sendUpdate)
 
 export default router;
