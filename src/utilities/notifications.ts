@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import pdf from 'html-pdf';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -74,11 +75,8 @@ export const SendInvestorsUpdate =
     cash_burn: string
   ) => {
     try {
-      const response = await transport.sendMail({
-        from: `${process.env.GMAIL_USER}`,
-        to,
-        subject,
-        html: `
+
+      const htmlContent = `
       Kindly find below the Investor Update report of ${company_name}.
 
       <body style="margin: 0; padding: 0; background-color: #8080801a; font-size: 1rem; font-family: Inter">
@@ -356,6 +354,27 @@ export const SendInvestorsUpdate =
         <!-- Email template Ends -->
       </body>
       `
+      const pdfBuffer = await new Promise<Buffer>((resolve, reject) => {
+        pdf.create(htmlContent).toBuffer((err, buffer) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(buffer);
+          }
+        });
+      });
+      const response = await transport.sendMail({
+        from: `${process.env.GMAIL_USER}`,
+        to,
+        subject,
+        html: htmlContent,
+        attachments: [
+          {
+            filename: `${company_name}_Update.pdf`,
+            content: pdfBuffer,
+            contentType: 'application/pdf'
+          }
+        ]
       })
     } catch (err: any) {
       console.log(err.message)
