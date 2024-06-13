@@ -168,8 +168,8 @@ export const SendInvestorsUpdate =
                     <!-- Forecasting Next Months Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Forecasting Next Months
                           </div>
                           <!-- Font size for default screens -->
@@ -186,8 +186,8 @@ export const SendInvestorsUpdate =
                     <!-- Cash Burn Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Cash Burn
                           </div>
                           <!-- Font size for default screens -->
@@ -204,8 +204,8 @@ export const SendInvestorsUpdate =
                     <!-- Cash in hand Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Cash In Hand
                           </div>
                           <!-- Font size for default screens -->
@@ -240,8 +240,8 @@ export const SendInvestorsUpdate =
                     <!-- Lows Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Lows
                           </div>
                           <!-- Font size for default screens -->
@@ -258,8 +258,8 @@ export const SendInvestorsUpdate =
                     <!-- News Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             News
                           </div>
                           <!-- Font size for default screens -->
@@ -276,8 +276,8 @@ export const SendInvestorsUpdate =
                     <!--Requests Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Requests
                           </div>
                           <!-- Font size for default screens -->
@@ -294,8 +294,8 @@ export const SendInvestorsUpdate =
                     <!--Deck Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Deck
                           </div>
                           <!-- Font size for default screens -->
@@ -312,8 +312,8 @@ export const SendInvestorsUpdate =
                     <!--Founder's Message Container -->
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td style="padding-bottom: 20px; border-bottom: 1px solid #4a4b4d5c; padding-top: 20px;">
-                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 30px;">
+                        <td style="padding-bottom: 10px; border-bottom: 1px solid #4a4b4d5c; padding-top: 10px;">
+                          <div style="font-size: 26px; font-style: normal; font-weight: 700; line-height: 26px; padding-bottom: 15px;">
                             Founder's Message
                           </div>
                           <!-- Font size for default screens -->
