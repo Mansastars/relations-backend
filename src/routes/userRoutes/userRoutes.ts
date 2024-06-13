@@ -14,6 +14,7 @@ import { resendVerification } from "../../controllers/userControllers/resendVeri
 import { forgetPassword } from "../../controllers/userControllers/forgetPassword";
 import { resetPassword } from "../../controllers/userControllers/resetPassword";
 import { sendUpdate } from "../../controllers/investorUpdateController/SendUpdate";
+import { getUpdate } from "../../controllers/investorUpdateController/getUpdate";
 
 
 const router = express.Router();
@@ -34,5 +35,6 @@ router.post("/forgot-password", forgetPassword)
 router.post("/reset-password/:token", resetPassword)
 router.post("/customer-portal", generalAuthoriser, customerPortal)
 router.post("/send-update", generalAuthoriser, sendUpdate)
+router.get("/get-update", generalAuthoriser, getUpdate)
 
 export default router;
