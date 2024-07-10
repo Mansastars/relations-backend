@@ -17,7 +17,7 @@ export const googleLogin = async(request: JwtPayload, response: Response)=>{
     try{
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
         const ticket = await client.verifyIdToken({
-            idToken: data.access_token,
+            idToken: data,
             audience: process.env.GOOGLE_CLIENT_ID
         })
         const payload: any = ticket.getPayload()
