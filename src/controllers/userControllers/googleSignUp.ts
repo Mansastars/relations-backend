@@ -7,12 +7,10 @@ import { hashPassword } from "../../helpers/helpers";
 
 export const googleSignUp = async (request: JwtPayload, response: Response) => {
     const data = request.body
-    console.log(data)
     try {
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
-        console.log(client)
         const ticket = await client.verifyIdToken({
-            idToken: data,
+            idToken: data.access_token,
             audience: process.env.GOOGLE_CLIENT_ID
         })
         console.log(ticket)
@@ -31,9 +29,9 @@ export const googleSignUp = async (request: JwtPayload, response: Response) => {
 
         const newUser = await User.create({
             id: userId,
-            first_name:payload.first_name,
-            last_name:payload.last_name,
-            email:payload.email,
+            first_name: payload.first_name,
+            last_name: payload.last_name,
+            email: payload.email,
             password: passwordHash,
             role: role.USER,
             on_trial: true,
@@ -42,7 +40,7 @@ export const googleSignUp = async (request: JwtPayload, response: Response) => {
             isBlocked: false,
             createdAt: new Date(),
             updatedAt: new Date(),
-          }) as unknown as UserAttributes;
+        }) as unknown as UserAttributes;
 
         return response.status(200).json({
             status: `success`,
