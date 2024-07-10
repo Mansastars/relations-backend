@@ -7,12 +7,15 @@ import { hashPassword } from "../../helpers/helpers";
 
 export const googleSignUp = async (request: JwtPayload, response: Response) => {
     const data = request.body
+    console.log(data)
     try {
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+        console.log(client)
         const ticket = await client.verifyIdToken({
             idToken: data,
             audience: process.env.GOOGLE_CLIENT_ID
         })
+        console.log(ticket)
         const payload: any = ticket.getPayload()
         console.log(payload)
 
