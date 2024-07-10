@@ -25,7 +25,7 @@ export const SendEmailVerification = async (to: string, token: string) => {
       <img src="https://assets-global.website-files.com/656a05e80b02929dac61def9/656c9f5f7a03960364b37e73_Screenshot_2023-02-12_at_22.15.46-removebg-preview%20(1)-p-500.png" alt="Mansastars" style="height: 100px; width: 100px; margin-bottom: 20px;">
       <h1 style="margin-bottom: 20px;">Welcome to Mansastars</h1>
       <p style="margin-bottom: 20px;">Click the button below to verify your account</p>
-      <a href="http://${process.env.DOMAIN}/verify/${token}" style="display: inline-block; padding: 10px 20px; border-radius: 10px; background-color: #00CED1; color: #fff; text-decoration: none;">Verify Account</a>
+      <a href="${process.env.HTTPS}${process.env.DOMAIN}/verify/${token}" style="display: inline-block; padding: 10px 20px; border-radius: 10px; background-color: #00CED1; color: #fff; text-decoration: none;">Verify Account</a>
   </div>`,
     });
   } catch (err: any) {
