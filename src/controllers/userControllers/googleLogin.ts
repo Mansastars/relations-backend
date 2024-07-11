@@ -14,14 +14,8 @@ const stripe = require("stripe")(process.env.SECRET_KEY)
 
 
 export const googleLogin = async(request: JwtPayload, response: Response)=>{
-    const data = request.body
+    const data = request.body.tokenResponse
     try{
-        // const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
-        // const ticket = await client.verifyIdToken({
-        //     idToken: data.access_token,
-        //     audience: process.env.GOOGLE_CLIENT_ID
-        // })
-        // const payload: any = ticket.getPayload()
         const tokenInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${data.access_token}`);
         const tokenInfo = tokenInfoResponse.data;
 
@@ -167,6 +161,7 @@ export const googleLogin = async(request: JwtPayload, response: Response)=>{
       showBilling
     });
     }catch(error:any){
+        console.log(error.message)
         return response.status(500).json({
             status: `error`,
             message:`Google Sign Up Failed`,
