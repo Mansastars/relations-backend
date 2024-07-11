@@ -8,6 +8,7 @@ import GeneralContact from "../../models/generalContacts/generalContacts";
 import moment from "moment";
 import Payment from "../../models/paymentModel/paymentModel";
 import { v4 } from "uuid";
+import axios from "axios";
 
 const stripe = require("stripe")(process.env.SECRET_KEY)
 
@@ -15,12 +16,18 @@ const stripe = require("stripe")(process.env.SECRET_KEY)
 export const googleLogin = async(request: JwtPayload, response: Response)=>{
     const data = request.body
     try{
-        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
-        const ticket = await client.verifyIdToken({
-            idToken: data,
-            audience: process.env.GOOGLE_CLIENT_ID
-        })
-        const payload: any = ticket.getPayload()
+        // const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+        // const ticket = await client.verifyIdToken({
+        //     idToken: data.access_token,
+        //     audience: process.env.GOOGLE_CLIENT_ID
+        // })
+        // const payload: any = ticket.getPayload()
+        const tokenInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${data.access_token}`);
+        const tokenInfo = tokenInfoResponse.data;
+
+        // Fetch user info
+        const userInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${data.access_token}`);
+        const payload = userInfoResponse.data;
         console.log(payload)
 
         const user1 = (await User.findOne({ where: { email: payload.email } })) as unknown as UserAttributes;

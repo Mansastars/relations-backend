@@ -4,17 +4,26 @@ import { OAuth2Client } from "google-auth-library";
 import User, { UserAttributes, role } from "../../models/userModel/userModel";
 import { v4 } from "uuid";
 import { hashPassword } from "../../helpers/helpers";
+import axios from "axios"
 
 export const googleSignUp = async (request: JwtPayload, response: Response) => {
     const data = request.body
     try {
-        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
-        const ticket = await client.verifyIdToken({
-            idToken: data.access_token,
-            audience: process.env.GOOGLE_CLIENT_ID
-        })
-        console.log(ticket)
-        const payload: any = ticket.getPayload()
+        // const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+        // const ticket = await client.verifyIdToken({
+        //     idToken: data.access_token,
+        //     audience: process.env.GOOGLE_CLIENT_ID
+        // })
+        // console.log(ticket)
+        // const payload: any = ticket.getPayload()
+        // console.log(payload)
+        // Verify the access token
+        const tokenInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${data.access_token}`);
+        const tokenInfo = tokenInfoResponse.data;
+
+        // Fetch user info
+        const userInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${data.access_token}`);
+        const payload = userInfoResponse.data;
         console.log(payload)
 
         const checkUserEmail = await User.findOne({ where: { email: payload.email } });
@@ -29,8 +38,8 @@ export const googleSignUp = async (request: JwtPayload, response: Response) => {
 
         const newUser = await User.create({
             id: userId,
-            first_name: payload.first_name,
-            last_name: payload.last_name,
+            first_name: payload.given_name,
+            last_name: payload.family_name,
             email: payload.email,
             password: passwordHash,
             role: role.USER,
