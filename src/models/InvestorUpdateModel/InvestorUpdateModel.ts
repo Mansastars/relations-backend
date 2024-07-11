@@ -80,7 +80,7 @@ founders_message:{
     allowNull:true
 },
 founders_profile: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull:true
 },
 recipients_emails: {
@@ -88,15 +88,15 @@ recipients_emails: {
     allowNull:true
 },
 requests:{
-    type:DataTypes.STRING,
+    type:DataTypes.TEXT,
     allowNull:true
 },
 targets:{
-    type:DataTypes.STRING,
+    type:DataTypes.TEXT,
     allowNull:true
 },
 user_MoM_growth_rate:{
-    type:DataTypes.STRING,
+    type:DataTypes.TEXT,
     allowNull:true
 },
 gross_margin:{
@@ -132,47 +132,47 @@ chartImageUrl:{
     allowNull:true
 },
 januaryMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 februaryMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 marchMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 aprilMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 mayMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 juneMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 julyMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 augustMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 septemberMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 octoberMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 novemberMRR:{
-    type:DataTypes.INTEGER,
+    type:DataTypes.BIGINT,
     allowNull:true
 },
 decemberMRR:{
