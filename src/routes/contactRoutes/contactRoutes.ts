@@ -16,6 +16,7 @@ import { getSingleContact } from "../../controllers/contactControllers/getSingle
 import { importContacts } from "../../controllers/contactControllers/importContacts";
 import { exportContacts } from "../../controllers/contactControllers/exportContacts";
 import { getAllContacts } from "../../controllers/contactControllers/getAllContacts";
+import { deleteContactPhoto } from "../../controllers/contactControllers/deleteContactPhoto";
 
 const router = express.Router();
 
@@ -35,5 +36,6 @@ router.delete("/delete-contact/:id/:contact", generalAuthoriser, deleteContact)
 router.get("/single-contact/:id/:contactId",getSingleContact)
 router.post("/import-contacts", generalAuthoriser, importContacts)
 router.get("/export-contacts", generalAuthoriser, exportContacts)
+router.post("/delete_photo/:id/:contactId", generalAuthoriser, deleteContactPhoto)
 
 export default router;

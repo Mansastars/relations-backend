@@ -17,6 +17,8 @@ import { sendUpdate } from "../../controllers/investorUpdateController/SendUpdat
 import { getUpdate } from "../../controllers/investorUpdateController/getUpdate";
 import { googleSignUp } from "../../controllers/userControllers/googleSignUp";
 import { googleLogin } from "../../controllers/userControllers/googleLogin";
+import { updateProfilePhoto } from "../../controllers/userControllers/updateProfilePicture";
+import { deleteProfilePhoto } from "../../controllers/userControllers/deleteProfilePicture";
 
 
 const router = express.Router();
@@ -40,5 +42,7 @@ router.post("/send-update", generalAuthoriser, sendUpdate)
 router.get("/get-update", generalAuthoriser, getUpdate)
 router.post("/google_signup", googleSignUp)
 router.post("/google_login", googleLogin)
+router.post('/update_photo', generalAuthoriser, updateProfilePhoto)
+router.post("/delete_photo", generalAuthoriser, deleteProfilePhoto)
 
 export default router;

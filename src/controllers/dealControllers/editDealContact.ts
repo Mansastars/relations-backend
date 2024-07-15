@@ -13,6 +13,7 @@ export const editDealContact = async (request: JwtPayload, response: Response) =
             organization_name,
             deal_size,
             email,
+            profile_pic,
             phone_number,
             stage,
             meeting_date,
@@ -48,6 +49,7 @@ export const editDealContact = async (request: JwtPayload, response: Response) =
             phone_number: phone_number || findContact.phone_number,
             stage: stage || findContact.stage,
             meeting_date: meeting_date || findContact.meeting_date,
+            profile_pic: profile_pic || findContact.profile_pic,
             notes: notes || findContact.notes,
             updatedAt: new Date(),
         }, { where: { id: contactId, deal_id: dealId, owner_id: userId } })
