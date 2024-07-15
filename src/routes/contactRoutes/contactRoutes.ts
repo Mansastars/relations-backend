@@ -36,6 +36,6 @@ router.delete("/delete-contact/:id/:contact", generalAuthoriser, deleteContact)
 router.get("/single-contact/:id/:contactId",getSingleContact)
 router.post("/import-contacts", generalAuthoriser, importContacts)
 router.get("/export-contacts", generalAuthoriser, exportContacts)
-router.post("/delete_photo/:id/:contactId", generalAuthoriser, deleteContactPhoto)
+router.patch("/delete_photo/:id/:contactId", generalAuthoriser, deleteContactPhoto)
 
 export default router;

@@ -6,7 +6,7 @@ export const updateProfilePhoto = async (request:JwtPayload, response:Response)=
     const data = request.body
     const userId = request.user.id;
     try{
-        const picture = data.picture
+        const picture = data.profile_picture
         const user = await User.findOne({where: {id:userId}})
         if (!user){
             return response.status(400).json({

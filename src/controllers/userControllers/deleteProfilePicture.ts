@@ -3,7 +3,6 @@ import { JwtPayload } from "jsonwebtoken";
 import User from "../../models/userModel/userModel";
 
 export const deleteProfilePhoto = async (request:JwtPayload, response:Response)=>{
-    const data = request.body
     const userId = request.user.id;
     try{
         const user = await User.findOne({where: {id:userId}})

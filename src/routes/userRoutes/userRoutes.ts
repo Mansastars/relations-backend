@@ -42,7 +42,7 @@ router.post("/send-update", generalAuthoriser, sendUpdate)
 router.get("/get-update", generalAuthoriser, getUpdate)
 router.post("/google_signup", googleSignUp)
 router.post("/google_login", googleLogin)
-router.post('/update_photo', generalAuthoriser, updateProfilePhoto)
-router.post("/delete_photo", generalAuthoriser, deleteProfilePhoto)
+router.patch('/update_photo', generalAuthoriser, updateProfilePhoto)
+router.patch("/delete_photo", generalAuthoriser, deleteProfilePhoto)
 
 export default router;
