@@ -27,6 +27,10 @@ export const deleteContactPhoto = async (request: JwtPayload, response: Response
         const updatedContact = await Contact.update({
             profile_pic: '',
         }, { where: { id: contactId, deal_id: dealId, owner_id: userId } })
+        return response.status(200).json({
+            status: `success`,
+            message: `Contact photo deleted successfully`
+        })
     }catch(error:any){
         console.log(error.message)
         return response.status(500).json({

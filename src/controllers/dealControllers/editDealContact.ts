@@ -62,7 +62,7 @@ export const editDealContact = async (request: JwtPayload, response: Response) =
 
         return response.status(200).json({
             status: `success`,
-            message: `${first_name} ${last_name} was successfully updated`
+            message: `${findContact.first_name} ${findContact.last_name} was successfully updated`
         })
 
     } catch (error: any) {
