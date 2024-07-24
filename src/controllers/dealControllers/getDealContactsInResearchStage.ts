@@ -1,7 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 import { Response } from 'express'
 import Contact from "../../models/contactModel/contactModel";
-import { formatContacts } from "../../helpers/helpers";
+import { formatContacts, sortContactsByFirstName } from "../../helpers/helpers";
 
 export const getResearchContacts = async (request: JwtPayload, response: Response) => {
     try {
@@ -9,7 +9,8 @@ export const getResearchContacts = async (request: JwtPayload, response: Respons
         const deal_id = request.params.id;
         const stage = "Research"
         const contacts = await Contact.findAll({ where: { stage: stage, deal_id } })
-        const output = formatContacts(contacts)
+        const outputinit = formatContacts(contacts)
+        const output = sortContactsByFirstName(outputinit)
         if (contacts.length === 0 || undefined) {
             return response.status(200).json({
                 status: "success",
