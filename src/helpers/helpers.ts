@@ -59,6 +59,18 @@ export const formatContacts = (contacts: any) => {
   return allContacts
 }
 
+export const sortContactsByFirstName = (contacts: any) => {
+  return contacts.sort((a: any, b: any) => {
+    if (a.first_name < b.first_name) {
+      return -1
+    }
+    if (a.first_name > b.first_name) {
+      return 1
+    }
+    return 0
+  })
+}
+
 export const convertToDDMMYY = (isoDateString: any) => {
   const date = new Date(isoDateString);
   const day = date.getDate().toString().padStart(2, '0');
