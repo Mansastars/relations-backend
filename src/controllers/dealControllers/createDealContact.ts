@@ -64,6 +64,9 @@ export const createDealContact = async (request: JwtPayload, response: Response)
       updatedAt: new Date(),
     });
 
+    const contactExist = await GeneralContact.findOne({where:{email, phone_number, first_name, last_name}})
+
+    if(!contactExist){
     await GeneralContact.create({
       title: title || ``,
       id: v4(),
@@ -79,6 +82,7 @@ export const createDealContact = async (request: JwtPayload, response: Response)
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+  }
 
     if (!newContact) {
       return response.status(200).json({

@@ -17,6 +17,9 @@ import { importContacts } from "../../controllers/contactControllers/importConta
 import { exportContacts } from "../../controllers/contactControllers/exportContacts";
 import { getAllContacts } from "../../controllers/contactControllers/getAllContacts";
 import { deleteContactPhoto } from "../../controllers/contactControllers/deleteContactPhoto";
+import { singleContact } from "../../controllers/contactControllers/singleContact";
+import { editSingleContact } from "../../controllers/contactControllers/editSingleContact";
+import { deleteSingleContact } from "../../controllers/contactControllers/deleteSingleContact";
 
 const router = express.Router();
 
@@ -37,5 +40,8 @@ router.get("/single-contact/:id/:contactId",getSingleContact)
 router.post("/import-contacts", generalAuthoriser, importContacts)
 router.get("/export-contacts", generalAuthoriser, exportContacts)
 router.patch("/delete_photo/:id/:contactId", generalAuthoriser, deleteContactPhoto)
+router.get("/get-single-contact/:contactId", generalAuthoriser, singleContact)
+router.patch("/edit-single-contact/:contactId", generalAuthoriser, editSingleContact)
+router.delete("/delete-single-contact/:contactId", generalAuthoriser, deleteSingleContact)
 
 export default router;

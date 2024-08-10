@@ -16,7 +16,7 @@ export const generateToken = (data: any) => {
 };
 
 export const generateVerificationToken = (data: any) => {
-  return jwt.sign(data, `${process.env.APP_SECRET}`, { expiresIn: "20m" });
+  return jwt.sign(data, `${process.env.APP_SECRET}`, { expiresIn: "24h" });
 };
 
 export const formatName = (name: string) => {
@@ -36,8 +36,8 @@ export const formatContacts = (contacts: any) => {
       deal_id: contacts[i].dataValues.deal_id,
       priority: contacts[i].dataValues.priority,
       title: contacts[i].dataValues.title,
-      first_name: formatName(contacts[i].dataValues.first_name),
-      last_name: formatName(contacts[i].dataValues.last_name),
+      first_name: contacts[i].dataValues.first_name !== '' ? formatName(contacts[i].dataValues.first_name) : '',
+      last_name: contacts[i].dataValues.last_name !== '' ?formatName(contacts[i].dataValues.last_name): '',
       gender: contacts[i].dataValues.gender,
       moves_made: contacts[i].dataValues.moves_made,
       organization_name: contacts[i].dataValues.organization_name,
