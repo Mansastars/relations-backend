@@ -9,6 +9,7 @@ import { database } from "./configurations";
 import userRoutes from "./routes/userRoutes/userRoutes"
 import contactRoutes from "./routes/contactRoutes/contactRoutes"
 import dealRoutes from "./routes/dealRoutes/dealRoutes"
+import generalRoutes from "./routes/generalRoutes/generalRoutes"
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(cors());
 app.use("/users", userRoutes);
 app.use("/contacts", contactRoutes);
 app.use("/deals", dealRoutes)
+app.use("/general", generalRoutes)
 
 database
   .sync({})
