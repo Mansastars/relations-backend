@@ -41,7 +41,7 @@ export const template1 = async (
   <!-- Wrapper to center the content -->
   <div
     style="
-      max-width: 600px;
+      max-width: 80%;
       margin: 0 auto;
       padding: 20px;
       background-color: #ffffff;
