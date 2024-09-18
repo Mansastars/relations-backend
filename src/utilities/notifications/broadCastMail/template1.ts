@@ -41,24 +41,23 @@ export const template1 = async (
   <!-- Wrapper to center the content -->
   <div
     style="
-      max-width: 80%;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 20px;
       background-color: #ffffff;
       border-radius: 8px;
+      overflow: hidden;
     "
   >
     <!-- Header section -->
     <div
       style="
         text-align: center;
-        padding-bottom: 20px;
+        padding: 20px;
         border-bottom: 1px solid #ddd;
-        margin-bottom: 20px;
       "
     >
       <img
-        src="${logo? logo:"https://crm.mansastars.com/assets/MansaLogo-B4u3uUZv.png"}"
+        src="${logo ? logo : 'https://crm.mansastars.com/assets/MansaLogo-B4u3uUZv.png'}"
         alt="Respondent's Logo"
         width="100"
         height="100"
@@ -67,14 +66,18 @@ export const template1 = async (
     </div>
 
     <!-- Body section -->
-    <div style="text-align: left; color: #333;">
-      <p>Hello ${customer_name? customer_name: ""},</p>
-      <p>${body}</p>
-      <p style="margin-top: 30px;">Thank you,</p>
-      <p>${name}</p>
+    <div style="text-align: left; color: #333; padding: 20px;">
+      <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
+        Hello ${customer_name ? customer_name : ''},
+      </p>
+      <p style="font-size: 16px; line-height: 1.5; margin-bottom: 30px;">
+        ${body}
+      </p>
+      <p style="font-size: 16px; margin-top: 30px;">Thank you,</p>
+      <p style="font-size: 16px;">${name}</p>
     </div>
 
-    <!-- Footer section (always visible) -->
+    <!-- Footer section -->
     <div
       style="
         background-color: #1a1d32;
@@ -82,12 +85,11 @@ export const template1 = async (
         padding: 20px;
         text-align: center;
         margin-top: 40px;
-        border-radius: 0 0 8px 8px;
       "
     >
-      <p style="margin: 0;">${name}</p>
-      <p style="margin: 0;">${address}</p>
-      <p style="margin: 0;">
+      <p style="margin: 0; font-size: 14px; color: #ffffff;">${name}</p>
+      <p style="margin: 0; font-size: 14px; color: #ffffff;">${address}</p>
+      <p style="margin: 0; font-size: 14px;">
         <a
           href="tel:${phone_number}"
           style="color: #ffffff; text-decoration: none;"
@@ -99,7 +101,11 @@ export const template1 = async (
       <!-- Powered by section -->
       <table
         role="presentation"
-        style="width: 100%; border-collapse: collapse; margin-top: 10px;"
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 10px;
+        "
       >
         <tr>
           <td style="text-align: center;">
@@ -119,11 +125,27 @@ export const template1 = async (
           </td>
         </tr>
       </table>
+
+      <!-- Unsubscribe section -->
+      <p
+        style="
+          margin: 10px 0 0;
+          color: #ffffff;
+          font-size: 10px;
+        "
+      >
+        <a
+          href="${process.env.DOMAIN}/${to}"
+          style="color: #ffffff; text-decoration: none;"
+        >
+          Unsubscribe
+        </a>
+      </p>
     </div>
   </div>
 </div>
 
-        `,
+ `,
       });
   
       return response; // Optionally return response for further handling
