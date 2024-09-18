@@ -20,8 +20,6 @@ export const sendBroadCastEmail = async (
     logo
   } = request.body;
   try {
-    console.log(recipients_email)
-    console.log(request.body)
     if(send_to_all == true){
         const allContacts = await GeneralContact.findAll({where: {owner_id:userId}})
         allContacts.map((contact)=>{
