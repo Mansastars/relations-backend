@@ -68,12 +68,12 @@ export const template1 = async (
     <!-- Body section -->
     <div style="text-align: left; color: #333; padding: 20px;">
       <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
-        Hello ${customer_name ? customer_name : ''},
+        <!-- Hello ${customer_name ? customer_name : ''},-->
       </p>
       <p style="font-size: 16px; line-height: 1.5; margin-bottom: 30px;">
         ${body}
       </p>
-      <p style="font-size: 16px; margin-top: 30px;">Thank you,</p>
+      <!--<p style="font-size: 16px; margin-top: 30px;">Thank you,</p>-->
       <p style="font-size: 16px;">${name}</p>
     </div>
 
