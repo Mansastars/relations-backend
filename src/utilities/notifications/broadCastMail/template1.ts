@@ -35,48 +35,8 @@ export const template1 = async (
         replyTo,
         subject,
         html: `
-          <div
-  style="margin: 0; padding: 0; width: 100%; background-color: #f2f3ff; font-family: Arial, sans-serif;"
->
-  <!-- Wrapper to center the content -->
-  <div
-    style="
-      max-width: 100%;
-      margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      overflow: hidden;
-    "
-  >
-    <!-- Header section -->
-    <div
-      style="
-        text-align: center;
-        padding: 20px;
-        border-bottom: 1px solid #ddd;
-      "
-    >
-      <img
-        src="${logo ? logo : 'https://crm.mansastars.com/assets/MansaLogo-B4u3uUZv.png'}"
-        alt="Respondent's Logo"
-        width="100"
-        height="100"
-        style="border-radius: 50%; display: block; margin: 0 auto;"
-      />
-    </div>
-
-    <!-- Body section -->
-    <div style="text-align: left; color: #333; padding: 20px;">
-      <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">
-        <!-- Hello ${customer_name ? customer_name : ''},-->
-      </p>
-      <p style="font-size: 16px; line-height: 1.5; margin-bottom: 30px;">
+          
         ${body}
-      </p>
-      <!--<p style="font-size: 16px; margin-top: 30px;">Thank you,</p>-->
-      <p style="font-size: 16px;">${name}</p>
-    </div>
-
     <!-- Footer section -->
     <div
       style="
@@ -84,7 +44,6 @@ export const template1 = async (
         color: #ffffff;
         padding: 20px;
         text-align: center;
-        margin-top: 40px;
       "
     >
       <p style="margin: 0; font-size: 14px; color: #ffffff;">${name}</p>
@@ -143,7 +102,7 @@ export const template1 = async (
       </p>
     </div>
   </div>
-</div>
+
 
  `,
       });

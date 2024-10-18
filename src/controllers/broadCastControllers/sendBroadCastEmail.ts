@@ -7,7 +7,7 @@ export const sendBroadCastEmail = async (
   request: JwtPayload,
   response: Response
 ) => {
-    const userId = request.user.id
+  const userId = request.user.id;
   const {
     sender_email,
     recipients_email,
@@ -17,25 +17,54 @@ export const sendBroadCastEmail = async (
     name,
     address,
     phone_number,
-    logo
+    logo,
   } = request.body;
   try {
-    if(send_to_all == true){
-        const allContacts = await GeneralContact.findAll({where: {owner_id:userId}})
-        allContacts.map((contact)=>{
-            template1(sender_email, contact.email, subject, email_content, address, name, logo,phone_number)
-        })
-    }else{
-        const allContacts = recipients_email.split(' ')
-        console.log(allContacts)
-        allContacts.map((contact:any)=>{
-            template1(sender_email, contact, subject, email_content, address, name, logo,phone_number)
-        })
+    if (send_to_all == true) {
+      const allContacts = await GeneralContact.findAll({
+        where: { owner_id: userId },
+      });
+      allContacts.map((contact) => {
+        template1(
+          sender_email,
+          contact.email,
+          subject
+            .replace("{first_name}", contact.first_name || "")
+            .replace("{last_name}", contact.last_name || ""),
+          email_content
+            .replace("{first_name}", contact.first_name || "")
+            .replace("{last_name}", contact.last_name || ""),
+          address,
+          name,
+          logo,
+          phone_number
+        );
+      });
+    } else {
+      const allContacts = recipients_email.split(" ");
+      console.log(allContacts);
+      allContacts.map(async (contact: any) => {
+        const userDetails:any = await GeneralContact.findOne({where:{email:contact, owner_id:userId}})
+        template1(
+          sender_email,
+          contact,
+          subject
+            .replace("{first_name}", userDetails.first_name || "")
+            .replace("{last_name}", userDetails.last_name ||""),
+          email_content
+            .replace("{first_name}", userDetails.first_name || "")
+            .replace("{last_name}", userDetails.last_name ||""),
+          address,
+          name,
+          logo,
+          phone_number
+        );
+      });
     }
     return response.status(200).json({
-        status: "success",
-        message: `Successfully Sent`,
-      });
+      status: "success",
+      message: `Successfully Sent`,
+    });
   } catch (error: any) {
     return response.status(500).json({
       status: "error",
