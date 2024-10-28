@@ -2,6 +2,7 @@ import { Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import GeneralContact from "../../models/generalContacts/generalContacts";
 import { template1 } from "../../utilities/notifications/broadCastMail/template1";
+import { formatName } from "../../helpers/helpers";
 
 export const sendBroadCastEmail = async (
   request: JwtPayload,
@@ -29,11 +30,11 @@ export const sendBroadCastEmail = async (
           sender_email,
           contact.email,
           subject
-            .replace("{first_name}", contact.first_name || "")
-            .replace("{last_name}", contact.last_name || ""),
+            .replace("{first_name}", formatName(contact.first_name) || "")
+            .replace("{last_name}", formatName(contact.last_name) || ""),
           email_content
-            .replace("{first_name}", contact.first_name || "")
-            .replace("{last_name}", contact.last_name || ""),
+            .replace("{first_name}", formatName(contact.first_name) || "")
+            .replace("{last_name}", formatName(contact.last_name) || ""),
           address,
           name,
           logo,
@@ -49,11 +50,11 @@ export const sendBroadCastEmail = async (
           sender_email,
           contact,
           subject
-            .replace("{first_name}", userDetails.first_name || "")
-            .replace("{last_name}", userDetails.last_name ||""),
+            .replace("{first_name}", formatName(userDetails.first_name) || "")
+            .replace("{last_name}", formatName(userDetails.last_name) ||""),
           email_content
-            .replace("{first_name}", userDetails.first_name || "")
-            .replace("{last_name}", userDetails.last_name ||""),
+            .replace("{first_name}", formatName(userDetails.first_name) || "")
+            .replace("{last_name}", formatName(userDetails.last_name) ||""),
           address,
           name,
           logo,
