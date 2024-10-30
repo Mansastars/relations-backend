@@ -20,53 +20,68 @@ export const sendBroadCastEmail = async (
     phone_number,
     logo,
   } = request.body;
+
   try {
-    if (send_to_all == true) {
+    if (send_to_all === true) {
       const allContacts = await GeneralContact.findAll({
         where: { owner_id: userId },
       });
-      allContacts.map((contact) => {
-        template1(
+
+      for (const contact of allContacts) {
+        const formattedSubject = subject
+          .replace("{first_name}", formatName(contact.first_name) || "")
+          .replace("{last_name}", formatName(contact.last_name) || "");
+        const formattedContent = email_content
+          .replace("{first_name}", formatName(contact.first_name) || "")
+          .replace("{last_name}", formatName(contact.last_name) || "");
+
+        await template1(
           sender_email,
           contact.email,
-          subject
-            .replace("{first_name}", formatName(contact.first_name) || "")
-            .replace("{last_name}", formatName(contact.last_name) || ""),
-          email_content
-            .replace("{first_name}", formatName(contact.first_name) || "")
-            .replace("{last_name}", formatName(contact.last_name) || ""),
+          formattedSubject,
+          formattedContent,
           address,
           name,
           logo,
           phone_number
         );
-      });
+      }
     } else {
-      const allContacts = recipients_email.split(" ");
-      allContacts.map(async (contact: any) => {
-        const userDetails:any = await GeneralContact.findOne({where:{email:contact, owner_id:userId}})
-        template1(
-          sender_email,
-          contact,
-          subject
+      const allEmails = recipients_email?.split(",") || [];
+      
+      for (const contactEmail of allEmails) {
+        const userDetails = await GeneralContact.findOne({
+          where: { email: contactEmail.trim(), owner_id: userId },
+        });
+
+        if (userDetails) {
+          const formattedSubject = subject
             .replace("{first_name}", formatName(userDetails.first_name) || "")
-            .replace("{last_name}", formatName(userDetails.last_name) ||""),
-          email_content
+            .replace("{last_name}", formatName(userDetails.last_name) || "");
+          const formattedContent = email_content
             .replace("{first_name}", formatName(userDetails.first_name) || "")
-            .replace("{last_name}", formatName(userDetails.last_name) ||""),
-          address,
-          name,
-          logo,
-          phone_number
-        );
-      });
+            .replace("{last_name}", formatName(userDetails.last_name) || "");
+
+          await template1(
+            sender_email,
+            contactEmail,
+            formattedSubject,
+            formattedContent,
+            address,
+            name,
+            logo,
+            phone_number
+          );
+        }
+      }
     }
+
     return response.status(200).json({
       status: "success",
       message: `Successfully Sent`,
     });
   } catch (error: any) {
-    console.log(error)
+    console.error("Error in sendBroadCastEmail:", error);
     return response.status(500).json({
       status: "error",
       message: `Internal Server Error`,
