@@ -43,7 +43,6 @@ export const sendBroadCastEmail = async (
       });
     } else {
       const allContacts = recipients_email.split(" ");
-      console.log(allContacts);
       allContacts.map(async (contact: any) => {
         const userDetails:any = await GeneralContact.findOne({where:{email:contact, owner_id:userId}})
         template1(
@@ -67,6 +66,7 @@ export const sendBroadCastEmail = async (
       message: `Successfully Sent`,
     });
   } catch (error: any) {
+    console.log(error)
     return response.status(500).json({
       status: "error",
       message: `Internal Server Error`,
