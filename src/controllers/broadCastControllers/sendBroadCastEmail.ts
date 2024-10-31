@@ -53,7 +53,7 @@ export const sendBroadCastEmail = async (
         console.log(emailResponse);
       }
     } else {
-      const allEmails = recipients_email?.split(",") || [];
+      const allEmails = recipients_email?.split(" ") || [];
       console.log(allEmails);
 
       for (const contactEmail of allEmails) {
