@@ -19,9 +19,7 @@ export const template1 = async (
     body: string,
     address: string,
     name: string,
-    logo: string,
     phone_number: string,
-    customer_name?: string
   ) => {
     try {
       // Check if 'to' is provided
@@ -104,9 +102,9 @@ export const template1 = async (
   </div>
 
 
- `,
-      });
+ `,});
   
+ console.log(response)
       return response; // Optionally return response for further handling
     } catch (err: any) {
       console.log(err.message);
