@@ -52,7 +52,7 @@ export const sendBroadCastEmail = async (
         );
       }
     } else {
-      const  emails= recipients_email?.split(" ") || [];
+      const  emails= recipients_email
       const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
       const allEmails = emails.match(emailRegex) || [];
       console.log(allEmails);
