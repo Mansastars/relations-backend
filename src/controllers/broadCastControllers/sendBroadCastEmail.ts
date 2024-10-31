@@ -71,6 +71,7 @@ export const sendBroadCastEmail = async (
             .replace("{first_name}", formatName(userDetails?.first_name))
             .replace("{last_name}", formatName(userDetails?.last_name));
         }
+        console.log(contactEmail)
         const emailResponse = await template1(
           sender_email,
           contactEmail,
@@ -80,7 +81,7 @@ export const sendBroadCastEmail = async (
           name,
           phone_number
         );
-        console.log('Email response:',emailResponse);
+        console.log('Email response start',emailResponse, "Email response end");
       }
     }
 

@@ -104,7 +104,6 @@ export const template1 = async (
 
  `,});
   
- console.log(response)
       return response; // Optionally return response for further handling
     } catch (err: any) {
       console.log(err.message);
