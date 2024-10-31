@@ -56,31 +56,32 @@ export const sendBroadCastEmail = async (
       }
     } else {
       const allEmails = recipients_email?.split(",") || [];
+      console.log(allEmails)
       
       for (const contactEmail of allEmails) {
         const userDetails = await GeneralContact.findOne({
           where: { email: contactEmail, owner_id: userId },
         });
+        console.log(userDetails)
 
-        if (userDetails) {
           const formattedSubject = subject
-            .replace("{first_name}", formatName(userDetails.first_name) || "")
-            .replace("{last_name}", formatName(userDetails.last_name) || "");
+            .replace("{first_name}", formatName(userDetails?.first_name) || "")
+            .replace("{last_name}", formatName(userDetails?.last_name) || "");
+            
           const formattedContent = email_content
-            .replace("{first_name}", formatName(userDetails.first_name) || "")
-            .replace("{last_name}", formatName(userDetails.last_name) || "");
-
-          const emailResponse = await template1(
-            sender_email,
-            contactEmail,
-            formattedSubject,
-            formattedContent,
-            address,
-            name,
-            phone_number
-          );
-          console.log(emailResponse)
-        }
+            .replace("{first_name}", formatName(userDetails?.first_name) || "")
+            .replace("{last_name}", formatName(userDetails?.last_name) || "");
+ 
+        const emailResponse = await template1(
+          sender_email,
+          contactEmail,
+          formattedSubject,
+          formattedContent,
+          address,
+          name,
+          phone_number
+        );
+        console.log(emailResponse)
       }
     }
 
