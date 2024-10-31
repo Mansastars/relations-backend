@@ -63,8 +63,8 @@ export const sendBroadCastEmail = async (
           where: { email: contactEmail, owner_id: userId },
         });
         console.log(userDetails);
-        let formattedSubject = "";
-        let formattedContent = "";
+        let formattedSubject = subject.replace("{first_name}", '').replace("{last_name}",'');
+        let formattedContent = email_content.replace("{first_name}", '').replace("{last_name}",'');
         if (userDetails) {
           formattedSubject = subject
             .replace("{first_name}", formatName(userDetails?.first_name))
