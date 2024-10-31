@@ -8,7 +8,6 @@ export const sendBroadCastEmail = async (
   request: JwtPayload,
   response: Response
 ) => {
-  console.log(request.body);
   const userId = request.user.id;
   const {
     sender_email,
@@ -27,7 +26,6 @@ export const sendBroadCastEmail = async (
       const allContacts = await GeneralContact.findAll({
         where: { owner_id: userId },
       });
-      console.group(allContacts);
       if (!allContacts) {
         return response.status(400).json({
           status: "error",
@@ -62,7 +60,6 @@ export const sendBroadCastEmail = async (
         const userDetails = await GeneralContact.findOne({
           where: { email: contactEmail, owner_id: userId },
         });
-        console.log(userDetails);
         let formattedSubject = subject.replace("{first_name}", '').replace("{last_name}",'');
         let formattedContent = email_content.replace("{first_name}", '').replace("{last_name}",'');
         if (userDetails) {
@@ -83,7 +80,7 @@ export const sendBroadCastEmail = async (
           name,
           phone_number
         );
-        console.log(emailResponse);
+        console.log('Email response:',emailResponse);
       }
     }
 
