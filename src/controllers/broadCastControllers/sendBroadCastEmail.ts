@@ -35,13 +35,13 @@ export const sendBroadCastEmail = async (
       for (const contact of allContacts) {
         console.log(contact);
         const formattedSubject = subject
-          .replace("{first_name}", formatName(contact.first_name) || "")
-          .replace("{last_name}", formatName(contact.last_name) || "");
+          .replace("{first_name}", (formatName(contact.first_name) || ""))
+          .replace("{last_name}", (formatName(contact.last_name) || ""));
         const formattedContent = email_content
-          .replace("{first_name}", formatName(contact.first_name) || "")
-          .replace("{last_name}", formatName(contact.last_name) || "");
+          .replace("{first_name}", (formatName(contact.first_name) || ""))
+          .replace("{last_name}", (formatName(contact.last_name) || ""));
 
-        const emailResponse = await template1(
+         await template1(
           sender_email,
           contact.email,
           formattedSubject,
@@ -50,10 +50,11 @@ export const sendBroadCastEmail = async (
           name,
           phone_number
         );
-        console.log(emailResponse);
       }
     } else {
-      const allEmails = recipients_email?.split(" ") || [];
+      const  emails= recipients_email?.split(" ") || [];
+      const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+      const allEmails = emails.match(emailRegex) || [];
       console.log(allEmails);
 
       for (const contactEmail of allEmails) {
@@ -71,8 +72,8 @@ export const sendBroadCastEmail = async (
             .replace("{first_name}", formatName(userDetails?.first_name))
             .replace("{last_name}", formatName(userDetails?.last_name));
         }
-        console.log(contactEmail)
-        const emailResponse = await template1(
+       
+        await template1(
           sender_email,
           contactEmail,
           formattedSubject,
@@ -81,7 +82,6 @@ export const sendBroadCastEmail = async (
           name,
           phone_number
         );
-        console.log('Email response start',emailResponse, "Email response end");
       }
     }
 
