@@ -20,15 +20,19 @@ export const generateVerificationToken = (data: any) => {
 };
 
 export const formatName = (name: string) => {
-  let formattedName = '' + name[0].toUpperCase()
-  for (let i = 1; i < name.length; i++) {
-    formattedName += name[i]
+  if (name.length > 0) {
+    let formattedName = "" + name[0].toUpperCase();
+    for (let i = 1; i < name.length; i++) {
+      formattedName += name[i];
+    }
+    return formattedName;
+  } else {
+    return "";
   }
-  return formattedName
-}
+};
 
 export const formatContacts = (contacts: any) => {
-  let allContacts: any = []
+  let allContacts: any = [];
   for (let i = 0; i < contacts.length; i++) {
     let aContact: any = {
       id: contacts[i].dataValues.id,
@@ -36,8 +40,14 @@ export const formatContacts = (contacts: any) => {
       deal_id: contacts[i].dataValues.deal_id,
       priority: contacts[i].dataValues.priority,
       title: contacts[i].dataValues.title,
-      first_name: contacts[i].dataValues.first_name !== '' ? formatName(contacts[i].dataValues.first_name) : '',
-      last_name: contacts[i].dataValues.last_name !== '' ?formatName(contacts[i].dataValues.last_name): '',
+      first_name:
+        contacts[i].dataValues.first_name !== ""
+          ? formatName(contacts[i].dataValues.first_name)
+          : "",
+      last_name:
+        contacts[i].dataValues.last_name !== ""
+          ? formatName(contacts[i].dataValues.last_name)
+          : "",
       gender: contacts[i].dataValues.gender,
       moves_made: contacts[i].dataValues.moves_made,
       organization_name: contacts[i].dataValues.organization_name,
@@ -52,39 +62,41 @@ export const formatContacts = (contacts: any) => {
       rating: contacts[i].dataValues.rating,
       notes: contacts[i].dataValues.notes,
       createdAt: contacts[i].dataValues.createdAt,
-      updatedAt: contacts[i].dataValues.updatedAt
-    }
-    allContacts.push(aContact)
+      updatedAt: contacts[i].dataValues.updatedAt,
+    };
+    allContacts.push(aContact);
   }
-  return allContacts
-}
+  return allContacts;
+};
 
 export const sortContactsByFirstName = (contacts: any) => {
   return contacts.sort((a: any, b: any) => {
     if (a.first_name < b.first_name) {
-      return -1
+      return -1;
     }
     if (a.first_name > b.first_name) {
-      return 1
+      return 1;
     }
-    return 0
-  })
-}
+    return 0;
+  });
+};
 
 export const convertToDDMMYY = (isoDateString: any) => {
   const date = new Date(isoDateString);
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear().toString().slice(-2);
   return `${day}-${month}-${year}`;
-}
+};
 
-export const convertToISODateString = (regularDateString: any): string | null => {
-  const dateParts = regularDateString.split('/');
+export const convertToISODateString = (
+  regularDateString: any
+): string | null => {
+  const dateParts = regularDateString.split("/");
 
   if (dateParts.length === 3) {
-    const day = dateParts[0].padStart(2, '0');
-    const month = dateParts[1].padStart(2, '0');
+    const day = dateParts[0].padStart(2, "0");
+    const month = dateParts[1].padStart(2, "0");
     const year = dateParts[2];
 
     // Ensure the date is valid by constructing a Date object
