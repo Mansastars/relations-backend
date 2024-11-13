@@ -13,7 +13,6 @@ const emailQueue = new Bull('emailQueue', {
   redis: {
     host: '127.0.0.1', // Redis is running locally
     port: 6379,
-    password: 'your_redis_password', // use this if you set a password in redis.conf
   },
 });
 
