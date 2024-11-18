@@ -4,6 +4,7 @@ import GeneralContact from "../../models/generalContacts/generalContacts";
 import { template1 } from "../../utilities/notifications/broadCastMail/template1";
 import { formatName } from "../../helpers/helpers";
 import Bull from 'bull';
+import Contact from "../../models/contactModel/contactModel";
 
 const emailQueue = new Bull('emailQueue', {
   limiter: {
@@ -33,7 +34,6 @@ export const sendBroadCastEmail = async (
   request: JwtPayload,
   response: Response
 ) => {
-  console.log(request)
   const userId = request.user.id;
   const {
     sender_email,
@@ -44,12 +44,15 @@ export const sendBroadCastEmail = async (
     name,
     address,
     phone_number,
+    default_first_name,
+    default_last_name,
+    default_company_name
   } = request.body;
 
   try {
     let emailsToSend = [];
     if (send_to_all === true) {
-      const allContacts = await GeneralContact.findAll({
+      const allContacts = await Contact.findAll({
         where: { owner_id: userId },
       });
       if (!allContacts) {
@@ -61,10 +64,12 @@ export const sendBroadCastEmail = async (
 
       emailsToSend = allContacts.map(contact => ({
         to: contact.email,
-        subject: subject.replace("{first_name}", formatName(contact.first_name) || "")
-                        .replace("{last_name}", formatName(contact.last_name) || ""),
-        content: email_content.replace("{first_name}", formatName(contact.first_name) || "")
-                              .replace("{last_name}", formatName(contact.last_name) || "")
+        subject: subject.replace("{first_name}", formatName(contact.first_name) || default_first_name)
+                        .replace("{last_name}", formatName(contact.last_name) || default_last_name)
+                        .replace("{comapany_name}", formatName(contact.last_name) || default_company_name),
+        content: email_content.replace("{first_name}", formatName(contact.first_name) || default_first_name)
+                              .replace("{last_name}", formatName(contact.last_name) || default_last_name)
+                              .replace("{comapany_name}", formatName(contact.last_name) || default_company_name)
       }));
     } else {
       const  emails= recipients_email
@@ -75,16 +80,25 @@ export const sendBroadCastEmail = async (
         const userDetails = await GeneralContact.findOne({
           where: { email: contactEmail, owner_id: userId },
         });
-        let formattedSubject = subject.replace("{first_name}", '').replace("{last_name}",'');
-        let formattedContent = email_content.replace("{first_name}", '').replace("{last_name}",'');
+        let formattedSubject = ''
+        let formattedContent = ''
         if (userDetails) {
           formattedSubject = subject
             .replace("{first_name}", formatName(userDetails?.first_name))
-            .replace("{last_name}", formatName(userDetails?.last_name));
+            .replace("{last_name}", formatName(userDetails?.last_name))
+            .replace("{comapany_name}", formatName(userDetails.organization_name));
 
           formattedContent = email_content
             .replace("{first_name}", formatName(userDetails?.first_name))
-            .replace("{last_name}", formatName(userDetails?.last_name));
+            .replace("{last_name}", formatName(userDetails?.last_name))
+            .replace("{comapany_name}", formatName(userDetails.organization_name));
+        }else{
+          formattedSubject = subject.replace("{first_name}", default_first_name)
+          .replace("{last_name}", default_last_name)
+          .replace("{company_name}", default_company_name);
+          formattedContent = email_content.replace("{first_name}", default_first_name)
+          .replace("{last_name}", default_last_name)
+          .replace("{company_name}", default_company_name);
         }
 
         emailsToSend.push({ to: contactEmail, subject: formattedSubject, content: formattedContent });
