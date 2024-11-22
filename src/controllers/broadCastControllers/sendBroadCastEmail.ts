@@ -89,8 +89,8 @@ export const sendBroadCastEmail = async (
             .replaceAll("{company_name}", formatName(userDetails.organization_name) || default_company_name);
 
           formattedContent = email_content
-            .replaceAll("{first_name}", formatName(userDetails?.first_name) || default_company_name)
-            .replaceAll("{last_name}", formatName(userDetails?.last_name) || default_company_name)
+            .replaceAll("{first_name}", formatName(userDetails?.first_name) || default_first_name)
+            .replaceAll("{last_name}", formatName(userDetails?.last_name) || default_last_name)
             .replaceAll("{company_name}", formatName(userDetails.organization_name) || default_company_name);
         }else{
           formattedSubject = subject.replaceAll("{first_name}", default_first_name)
