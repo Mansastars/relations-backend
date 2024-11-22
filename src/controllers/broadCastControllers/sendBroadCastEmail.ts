@@ -64,12 +64,12 @@ export const sendBroadCastEmail = async (
 
       emailsToSend = allContacts.map(contact => ({
         to: contact.email,
-        subject: subject.replace("{first_name}", formatName(contact.first_name) || default_first_name)
-                        .replace("{last_name}", formatName(contact.last_name) || default_last_name)
-                        .replace("{comapany_name}", formatName(contact.last_name) || default_company_name),
-        content: email_content.replace("{first_name}", formatName(contact.first_name) || default_first_name)
-                              .replace("{last_name}", formatName(contact.last_name) || default_last_name)
-                              .replace("{comapany_name}", formatName(contact.last_name) || default_company_name)
+        subject: subject.replaceAll("{first_name}", formatName(contact.first_name) || default_first_name)
+                        .replaceAll("{last_name}", formatName(contact.last_name) || default_last_name)
+                        .replaceAll("{comapany_name}", formatName(contact.last_name) || default_company_name),
+        content: email_content.replaceAll("{first_name}", formatName(contact.first_name) || default_first_name)
+                              .replaceAll("{last_name}", formatName(contact.last_name) || default_last_name)
+                              .replaceAll("{comapany_name}", formatName(contact.last_name) || default_company_name)
       }));
     } else {
       const  emails= recipients_email
@@ -84,21 +84,21 @@ export const sendBroadCastEmail = async (
         let formattedContent = ''
         if (userDetails) {
           formattedSubject = subject
-            .replace("{first_name}", formatName(userDetails?.first_name))
-            .replace("{last_name}", formatName(userDetails?.last_name))
-            .replace("{comapany_name}", formatName(userDetails.organization_name));
+            .replaceAll("{first_name}", formatName(userDetails?.first_name) || default_first_name)
+            .replaceAll("{last_name}", formatName(userDetails?.last_name) || default_last_name)
+            .replaceAll("{comapany_name}", formatName(userDetails.organization_name) || default_company_name);
 
           formattedContent = email_content
-            .replace("{first_name}", formatName(userDetails?.first_name))
-            .replace("{last_name}", formatName(userDetails?.last_name))
-            .replace("{comapany_name}", formatName(userDetails.organization_name));
+            .replaceAll("{first_name}", formatName(userDetails?.first_name) || default_company_name)
+            .replaceAll("{last_name}", formatName(userDetails?.last_name) || default_company_name)
+            .replaceAll("{comapany_name}", formatName(userDetails.organization_name) || default_company_name);
         }else{
-          formattedSubject = subject.replace("{first_name}", default_first_name)
-          .replace("{last_name}", default_last_name)
-          .replace("{company_name}", default_company_name);
-          formattedContent = email_content.replace("{first_name}", default_first_name)
-          .replace("{last_name}", default_last_name)
-          .replace("{company_name}", default_company_name);
+          formattedSubject = subject.replaceAll("{first_name}", default_first_name)
+          .replaceAll("{last_name}", default_last_name)
+          .replaceAll("{company_name}", default_company_name);
+          formattedContent = email_content.replaceAll("{first_name}", default_first_name)
+          .replaceAll("{last_name}", default_last_name)
+          .replaceAll("{company_name}", default_company_name);
         }
 
         emailsToSend.push({ to: contactEmail, subject: formattedSubject, content: formattedContent });
