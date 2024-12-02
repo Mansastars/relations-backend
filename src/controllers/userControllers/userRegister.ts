@@ -3,6 +3,7 @@ import User, { UserAttributes, role } from "../../models/userModel/userModel";
 import { v4 } from "uuid";
 import { generateVerificationToken, hashPassword } from "../../helpers/helpers";
 import { SendEmailVerification } from "../../utilities/notifications";
+import CompanyStaff from "../../models/companyStaff/CompanyStaff";
 
 export const registerUser = async (request: Request, response: Response) => {
   try {
@@ -10,6 +11,7 @@ export const registerUser = async (request: Request, response: Response) => {
       first_name,
       last_name,
       email,
+      type,
       password,
       confirm_password,
     } = request.body;
@@ -40,7 +42,7 @@ export const registerUser = async (request: Request, response: Response) => {
       last_name,
       email,
       password: passwordHash,
-      role: role.USER,
+      role: type === 'user' ?  role.USER : role.COMPANY,
       on_trial: true,
       is_subscribed: true,
       isVerified: false,
@@ -48,6 +50,14 @@ export const registerUser = async (request: Request, response: Response) => {
       createdAt: new Date(),
       updatedAt: new Date(),
     }) as unknown as UserAttributes;
+
+    const userIsStaff = await CompanyStaff.findOne({where:{email}})
+    if(userIsStaff){
+      await CompanyStaff.update(
+        { staffId: userId },
+        { where: { email } }
+      );
+    }
 
     const findUser = (await User.findOne({
       where: { email },

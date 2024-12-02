@@ -4,6 +4,7 @@ import { database } from "../../configurations/index";
 export enum role {
   ADMIN = "Admin",
   USER = "User",
+  COMPANY = "Company",
 }
 
 

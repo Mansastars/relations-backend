@@ -10,6 +10,7 @@ import userRoutes from "./routes/userRoutes/userRoutes"
 import contactRoutes from "./routes/contactRoutes/contactRoutes"
 import dealRoutes from "./routes/dealRoutes/dealRoutes"
 import generalRoutes from "./routes/generalRoutes/generalRoutes"
+import companyRoutes from "./routes/companyRoutes/companyRoutes"
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/users", userRoutes);
 app.use("/contacts", contactRoutes);
 app.use("/deals", dealRoutes)
 app.use("/general", generalRoutes)
+app.use('/company', companyRoutes)
 
 database
   .sync({})
