@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 export const addStaff = async (request: JwtPayload, response: Response) => {
   const companyId = request.user.id;
   const staffEmail = request.body.email;
+  const permission = request.body.permission
   try {
     const staffExist = await User.findOne({ where: { email: staffEmail } });
     if (staffExist) {
@@ -15,6 +16,7 @@ export const addStaff = async (request: JwtPayload, response: Response) => {
         companyId,
         staffId: staffExist.id,
         email: staffEmail,
+        permission,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -23,6 +25,7 @@ export const addStaff = async (request: JwtPayload, response: Response) => {
         id: v4(),
         companyId,
         email: staffEmail,
+        permission,
         createdAt: new Date(),
         updatedAt: new Date(),
       });

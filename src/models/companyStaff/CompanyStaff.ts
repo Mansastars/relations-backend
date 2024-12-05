@@ -2,12 +2,17 @@ import { DataTypes, Model, Optional } from "sequelize";
 import { database } from "../../configurations/index";
 import User from "../userModel/userModel";
 
-// Attributes interface
+export enum permission {
+  VIEWER = "Viewer",
+  EDITOR = "Editor",
+}
+
 export interface CompanyStaffAttributes {
   id: string;
-  companyId: string; // Foreign key to the User table (company with role "COMPANY")
-  staffId?: string; // Foreign key to the User table (existing staff member)
-  email: string; // Staff email (used when staffId is not available)
+  companyId: string; 
+  staffId?: string; 
+  email: string;
+  permission?: string
   createdAt: Date;
   updatedAt: Date;
 }
@@ -39,6 +44,10 @@ CompanyStaff.init(
       validate: {
         isEmail: true,
       },
+    },
+    permission: {
+      type: DataTypes.ENUM(...Object.values(permission)),
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,

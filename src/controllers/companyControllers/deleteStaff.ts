@@ -4,18 +4,23 @@ import CompanyStaff from "../../models/companyStaff/CompanyStaff";
 
 export const deleteStaff = async (request: JwtPayload, response: Response) => {
   const companyId = request.user.id;
-  const staffId = request.body.staffId;
+  const staffId = request.params.id;
   try {
     const staffExist = await CompanyStaff.findOne({
-      where: { companyId, staffId },
+      where: { companyId, id:staffId },
     });
     if (staffExist) {
-      await CompanyStaff.destroy({ where: { staffId, companyId } });
+      const deleteStaff = await CompanyStaff.destroy({ where: { id:staffId, companyId } });
+      return response.status(200).json({
+        error: false,
+        message: "Staff deleted successfully",
+      });
+    }else{
+      return response.status(404).json({
+        error: true,
+        message: "Staff not found",
+      });
     }
-    return response.status(200).json({
-      error: false,
-      message: "Staff added successfully",
-    });
   } catch (error: any) {
     console.log(error.message)
     return response.status(500).json({
