@@ -16,6 +16,7 @@ export const getAllContacts = async (
     let allContacts = await GeneralContact.findAll({
       where: { owner_id: userId },
     });
+    console.log('user contacts length:', allContacts.length)
 
     // Check if the user is a company
     if (user?.role === role.COMPANY) {
@@ -44,10 +45,13 @@ export const getAllContacts = async (
       const userCompany = await CompanyStaff.findOne({
         where: { staffId: userId },
       });
+      console.log('user company id:',userCompany?.dataValues.companyId)
       if (userCompany) {
         const companyContacts = await GeneralContact.findAll({
-          where: { id: userCompany.dataValues.companyId },
+          where: { owner_id: userCompany.dataValues.companyId },
         });
+        
+        console.log('user company contacts length:', companyContacts.length)
         allContacts = [...allContacts, ...companyContacts];
 
         const companyStaffs = await CompanyStaff.findAll({
