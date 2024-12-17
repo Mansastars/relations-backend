@@ -42,7 +42,7 @@ export const registerUser = async (request: Request, response: Response) => {
       last_name,
       email,
       password: passwordHash,
-      role: type === 'user' ?  role.USER : role.COMPANY,
+      role: type === 'User' ?  role.USER : role.COMPANY,
       on_trial: true,
       is_subscribed: true,
       isVerified: false,
