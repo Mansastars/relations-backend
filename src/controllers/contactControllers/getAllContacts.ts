@@ -3,7 +3,7 @@ import { Response } from "express";
 import GeneralContact from "../../models/generalContacts/generalContacts";
 import User, { role } from "../../models/userModel/userModel";
 import CompanyStaff, {
-  CompanyStaffAttributes,
+  CompanyStaffAttributes, status
 } from "../../models/companyStaff/CompanyStaff";
 
 export const getAllContacts = async (
@@ -21,7 +21,7 @@ export const getAllContacts = async (
     if (user?.role === role.COMPANY) {
       // Fetch all staff for the company and filter out entries with invalid or null staffId
       const validStaffs = await CompanyStaff.findAll({
-        where: { companyId: userId },
+        where: { companyId: userId, status: status.ACCEPTED},
       }).then((staffs) =>
         staffs.filter((staff) => typeof staff.dataValues.staffId === "string")
       );
@@ -42,7 +42,7 @@ export const getAllContacts = async (
       }
     } else {
       const userCompany = await CompanyStaff.findOne({
-        where: { staffId: userId },
+        where: { staffId: userId, status:status.ACCEPTED },
       });
       if (userCompany) {
         const companyContacts = await GeneralContact.findAll({
@@ -52,7 +52,7 @@ export const getAllContacts = async (
         allContacts = [...allContacts, ...companyContacts];
 
         const companyStaffs = await CompanyStaff.findAll({
-          where: { companyId: userCompany.dataValues.companyId },
+          where: { companyId: userCompany.dataValues.companyId, status:status.ACCEPTED },
         }).then((staffs) =>
           staffs.filter(
             (staff) =>

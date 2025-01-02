@@ -3,6 +3,7 @@ import CompanyStaff from "../../models/companyStaff/CompanyStaff";
 import User from "../../models/userModel/userModel";
 import { JwtPayload } from "jsonwebtoken";
 import { v4 } from "uuid";
+import { status } from "../../models/companyStaff/CompanyStaff";
 
 export const addStaff = async (request: JwtPayload, response: Response) => {
   const companyId = request.user.id;
@@ -17,6 +18,7 @@ export const addStaff = async (request: JwtPayload, response: Response) => {
         staffId: staffExist.id,
         email: staffEmail,
         permission,
+        status: status.PENDING,
         createdAt: new Date(),
         updatedAt: new Date(),
       });

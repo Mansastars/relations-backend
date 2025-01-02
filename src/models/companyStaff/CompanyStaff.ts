@@ -7,12 +7,19 @@ export enum permission {
   EDITOR = "Editor",
 }
 
+export enum status {
+  PENDING = "Pending",
+  ACCEPTED = "Accepted",
+  REJECTED = "Rejected"
+}
+
 export interface CompanyStaffAttributes {
   id: string;
   companyId: string; 
   staffId?: string; 
   email: string;
-  permission?: string
+  permission?: string;
+  status?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -47,6 +54,10 @@ CompanyStaff.init(
     },
     permission: {
       type: DataTypes.ENUM(...Object.values(permission)),
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM(...Object.values(status)),
       allowNull: false,
     },
     createdAt: {
