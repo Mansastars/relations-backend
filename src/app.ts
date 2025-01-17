@@ -1,4 +1,4 @@
-import express from "express";
+import express,{Request,Response} from "express";
 import dotenv from "dotenv";
 import { HttpError } from "http-errors";
 import cookieParser from "cookie-parser";
@@ -6,11 +6,7 @@ import cors from "cors";
 import logger from "morgan";
 import bodyParser from "body-parser";
 import { database } from "./configurations";
-import userRoutes from "./routes/userRoutes/userRoutes"
-import contactRoutes from "./routes/contactRoutes/contactRoutes"
-import dealRoutes from "./routes/dealRoutes/dealRoutes"
-import generalRoutes from "./routes/generalRoutes/generalRoutes"
-import companyRoutes from "./routes/companyRoutes/companyRoutes"
+import indexRoutes from "./routes/indexRoutes";
 
 const app = express();
 
@@ -22,11 +18,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use("/users", userRoutes);
-app.use("/contacts", contactRoutes);
-app.use("/deals", dealRoutes)
-app.use("/general", generalRoutes)
-app.use('/company', companyRoutes)
+app.use("/v1", indexRoutes);
+app.get("/", (request: Request, response: Response) => {
+  response.redirect("/v1");
+});
+
 
 database
   .sync({})
